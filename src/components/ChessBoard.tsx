@@ -1,0 +1,331 @@
+
+import '../../public/css/chessboard.css'; // You can style the chess board in ChessBoard.css
+import {useState, useEffect, ReactNode} from 'react'
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { RookMoves1,KnightMoves1,bishopMoves1, blackKingMoves,blackQueenMoves,blackPawnMoves,whitePawnMoves} from './KeyMoves';
+import { faChessQueen as regularChessQueen } from '@fortawesome/free-regular-svg-icons';
+import { faChessPawn as regularChessPawn} from '@fortawesome/free-regular-svg-icons';
+import { faChessRook as regularChessRook } from '@fortawesome/free-regular-svg-icons';
+import { faChessBishop as regularChessBishop } from '@fortawesome/free-regular-svg-icons';
+import { faChessKnight as regularChessKnight } from '@fortawesome/free-regular-svg-icons';
+import { faChessKing as regularChessKing } from '@fortawesome/free-regular-svg-icons';
+
+import { faChessRook as solidChessRook } from '@fortawesome/free-solid-svg-icons';
+import { faChessBishop as solidChessBishop } from '@fortawesome/free-solid-svg-icons';
+import { faChessKnight as solidChessKnight } from '@fortawesome/free-solid-svg-icons';
+import { faChessKing as solidChessKing } from '@fortawesome/free-solid-svg-icons';
+import { faChessQueen as solidChessQueen } from '@fortawesome/free-solid-svg-icons';
+import { faChessPawn as solidChessPawn } from '@fortawesome/free-solid-svg-icons';
+
+const bk1=<FontAwesomeIcon icon={solidChessRook} />
+const bk2=<FontAwesomeIcon icon={solidChessKnight} />
+const bk3=<FontAwesomeIcon icon={solidChessBishop} />
+const bk4=<FontAwesomeIcon icon={solidChessKing} />
+const bk5=<FontAwesomeIcon icon={solidChessQueen} />
+const bk6=<FontAwesomeIcon icon={solidChessBishop} />
+const bk7=<FontAwesomeIcon icon={solidChessKnight} />
+const bk8=<FontAwesomeIcon icon={solidChessRook} />
+const bp1=<FontAwesomeIcon icon={solidChessPawn} />
+
+const wp1=<FontAwesomeIcon icon={regularChessPawn} />
+const wk1=<FontAwesomeIcon icon={regularChessRook} />
+const wk2=<FontAwesomeIcon icon={regularChessKnight} />
+const wk3=<FontAwesomeIcon icon={regularChessBishop} />
+const wk4=<FontAwesomeIcon icon={regularChessKing} />
+const wk5=<FontAwesomeIcon icon={regularChessQueen} />
+const wk6=<FontAwesomeIcon icon={regularChessBishop} />
+const wk7=<FontAwesomeIcon icon={regularChessKnight} />
+const wk8=<FontAwesomeIcon icon={regularChessRook} />
+
+const board:any=[];
+
+for(let i=0; i<8; i++){
+    for(let j=0; j<8; j++){
+      board.push([i,j])
+       
+    }
+}
+
+const blackKey={
+  b1:[0,0],
+  b2:[0,1],
+  b3:[0,2],
+  b4:[0,3],
+  b5:[0,4],
+  b6:[0,5],
+  b7:[0,6],
+  b8:[0,7]
+}
+
+const whiteKey={
+  w1:[7,0],
+  w2:[7,1],
+  w3:[7,2],
+  w4:[7,3],
+  w5:[7,4],
+  w6:[7,5],
+  w7:[7,6],
+  w8:[7,7]
+}
+const blackPawn={
+  bp1:[1,0],
+  bp2:[1,1],
+  bp3:[1,2],
+  bp4:[1,3],
+  bp5:[1,4],
+  bp6:[1,5],
+  bp7:[1,6],
+  bp8:[1,7]
+}
+const whitePawn={
+  wp1:[6,0],
+  wp2:[6,1],
+  wp3:[6,2],
+  wp4:[6,3],
+  wp5:[6,4],
+  wp6:[6,5],
+  wp7:[6,6],
+  wp8:[6,7]
+}
+const obj={       
+  k1:blackKey, 
+  p1:blackPawn,
+  k2:whiteKey,
+  p2:whitePawn
+}
+const ChessBoard = () => {
+  const [item, setItem] = useState(obj); 
+  const [validStp, setValidStp]:any = useState(null); 
+  const [key, setKey] = useState("b1"); 
+  const [crash, setCrash]= useState(false);
+
+  // const parentFun=(e:any, a:any,b:any,c:any)=>{
+  //   if(key=='na'){
+  //    if(c=='b1') movebk1(a,b,c)
+  //     if(c=='b2') movebk2(a,b,c)
+  //       if(c=='b3') movebk3(a,b,c)
+  //   }
+  //   else{
+  //     movebk(a,b,c)
+  //   }
+  // }
+
+ useEffect(()=>{
+  localStorage.setItem("chessObj", JSON.stringify(item));
+ 
+},[item])
+
+const isKeyed=()=>{
+  if(key=='na'){
+    return false;
+  }else{
+  return true;
+  }
+  }
+
+const movebk=(a:any, b:any,c:any,)=>{
+
+let subArr:any=[a,b]
+const containsArray = validStp.some((el:any)=> {
+  return el.length === subArr.length && el.every((value:any, index:any) => {
+    return value === subArr[index];
+  });
+});
+  if(key!='na' && containsArray){
+ 
+    let newObj= JSON.parse(JSON.stringify(item));
+    if(key.includes('bp')) newObj={...newObj, p1:{...item.p1, [key]:[a,b]}} 
+    else if(key.includes('wp')) newObj={...newObj, p2:{...item.p2, [key]:[a,b]}}
+    else if(key.length==2 && key.includes('b')) newObj={...newObj, k1:{...item.k1, [key]:[a,b]}}
+    else  newObj={...newObj, k2:{...item.k2, [key]:[a,b]}}
+    setItem(newObj)
+  }
+ //setKey('na')
+ setValidStp(null)
+}
+const movebk1=(e:any,a:any, b:any,v:any)=>{
+  e.stopPropagation();
+  if(key=='na'){
+    let res=RookMoves1(a,b);
+    console.log('vlidsteps',res)
+      if(res.length>0){
+      setKey(v)
+      setValidStp(res)
+      console.log('res',res,v)
+      }
+  }
+  
+}
+
+const movebk2=(e:any, a:any, b:any,v:any)=>{
+  e.stopPropagation();
+  let res=KnightMoves1(a,b);
+  console.log("valid",res)
+  if(res.length>0){
+    setKey(v)
+  setValidStp(res)
+
+  }
+}
+
+const movebk3=(e:any, a:any, b:any,v:any)=>{
+ e.stopPropagation();
+  let res=bishopMoves1(a,b);
+  if(res.length>0){
+    setKey(v)
+  setValidStp(res)
+  }
+}
+
+const movebQueen=(e:any, a:any, b:any,key:any)=>{
+ e.stopPropagation();
+  let res=blackQueenMoves(a,b);
+  console.log('quees',res)
+  if(res.length>0){
+    setValidStp(res);
+    setKey(key)
+   
+  }
+}
+const movebKing=(e:any, a:any, b:any,key:any)=>{
+ e.stopPropagation();
+  let res=blackKingMoves(a,b);
+
+  if(res.length>0){
+    setValidStp(res);
+    setKey(key)
+   
+  }
+}
+
+// 3 2 bp3
+const movebPawn=(e:any,a:any, b:any,v:any)=>{
+  console.log('first',a,b,v,key)
+  e.stopPropagation();
+  let res;
+  
+    if(v.includes("bp")) res=blackPawnMoves(a,b);
+    else res= whitePawnMoves(a,b)
+  if(crash){
+    combat(a,b,v,key)
+  }else{
+    if(res.length>1){
+      setKey(v);
+      setCrash(true)
+      setValidStp(res);
+    }else{
+      setKey(v);
+      setCrash(false);
+      setValidStp(res);
+    }
+  }
+
+  console.log('second',a,b,v,key)
+}
+console.log('out',key,crash)
+
+
+
+const combat=(a:any, b:any,v:any, key:any)=>{
+  let newObj= JSON.parse(JSON.stringify(item));
+  console.log('comb',a,b,'v=',v,key,newObj)
+  console.log( 'comp',newObj.p1[v],newObj.p2[key])  //newObj. p1[v] ==newObj.p2[key]\
+  for(let i in newObj){
+  // console.log('i',i, newObj[i])
+    for(let j in newObj[i]){
+     //console.log('j',j, newObj[i][j])
+  
+      if(j==key){
+        console.log('j',j, key,v, newObj['p1'][v], newObj['p1']['bp3'],newObj[i][v])
+        // let newObj1= {...newObj[i],[key]:newObj[i][v]}
+        // newObj1={...newObj, [newObj[i]]:newObj1}
+        // if(key.includes('wp')) newObj={...newObj, [newObj['p1']]:{...newObj['p1'],[j]:newObj['p1'][v]}}
+        // else newObj={...newObj, [newObj['p2']]:{...newObj['p2'],[j]:newObj['p2'][v]}}
+        console.log('newo1',newObj)
+      }
+   
+    }
+  }
+// newObj.p2[key] =  newObj.p1[v]
+// newObj.p1[v]=[-1,-1]
+ 
+  setCrash(false)
+  setValidStp(null) 
+  setItem(newObj)
+}
+console.log("item",item)
+ const renderUi=()=>{
+   return <div style={{ width:"60%", margin:"auto", display:"flex", flexWrap:"wrap"}} className='Ch'>
+ {board.map((el:any)=>{
+             return  <ToggleDiv onClick={()=>movebk(el[0],el[1],'c')} key={el[0]+""+el[1]+1} id={el[0]+""+el[1]+2} bg={el[0]+el[1]} style={{width:"12%", height:"4.6rem"}}>
+             <div id={el[0]+""+el[1]} > 
+           {el[0]==item.k1.b1[0] && el[1]==item.k1.b1[1]? <div onClick={(e)=>movebk1(e,el[0],el[1],'b1')} className="chessKey">{bk1}</div>:
+           el[0]==item.k1.b2[0] && el[1]==item.k1.b2[1]?<div onClick={(e)=>movebk2(e,el[0],el[1],'b2')} className="chessKey">{bk2}</div>:
+           el[0]==item.k1.b3[0] && el[1]==item.k1.b3[1]?<div onClick={(e)=>movebk3(e,el[0],el[1],'b3')} className="chessKey">{bk3}</div>:
+           el[0]==item.k1.b4[0] && el[1]==item.k1.b4[1]?<div onClick={(e)=>movebKing(e,el[0],el[1],'b4')} className="chessKey">{bk4}</div>:
+           el[0]==item.k1.b5[0] && el[1]==item.k1.b5[1]?<div onClick={(e)=>movebQueen(e,el[0],el[1],'b5')} className="chessKey">{bk5}</div>:
+           el[0]==item.k1.b6[0] && el[1]==item.k1.b6[1]?<div onClick={(e)=>movebk3(e,el[0],el[1],'b6')} className="chessKey">{bk6}</div>:
+           el[0]==item.k1.b7[0] && el[1]==item.k1.b7[1]?<div onClick={(e)=>movebk2(e,el[0],el[1],'b7')} className="chessKey">{bk7}</div>:
+           el[0]==item.k1.b8[0] && el[1]==item.k1.b8[1]?<div onClick={(e)=>movebk1(e,el[0],el[1],'b8')} className="chessKey">{bk8}</div>:
+           el[0]==item.p1.bp1[0] && el[1]==item.p1.bp1[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp1')} className="chessKey">{bp1}</div>:
+           el[0]==item.p1.bp2[0] && el[1]==item.p1.bp2[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp2')} className="chessKey">{bp1}</div>:
+           el[0]==item.p1.bp3[0] && el[1]==item.p1.bp3[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp3')} className="chessKey">{bp1}</div>:
+           el[0]==item.p1.bp4[0] && el[1]==item.p1.bp4[1]?<div  onClick={(e)=>movebPawn(e,el[0],el[1],'bp4')} className="chessKey">{bp1}</div>:
+           el[0]==item.p1.bp5[0] && el[1]==item.p1.bp5[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp5')} className="chessKey">{bp1}</div>:
+           el[0]==item.p1.bp6[0] && el[1]==item.p1.bp6[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp6')} className="chessKey">{bp1}</div>:
+           el[0]==item.p1.bp7[0] && el[1]==item.p1.bp7[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp7')} className="chessKey">{bp1}</div>:
+           el[0]==item.p1.bp8[0] && el[1]==item.p1.bp8[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp8')} className="chessKey">{bp1}</div>:          
+          //handle white
+          el[0]==item.p2.wp1[0] && el[1]==item.p2.wp1[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp1')} className="chessKey">{wp1}</div>:
+           el[0]==item.p2.wp2[0] && el[1]==item.p2.wp2[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp2')} className="chessKey">{wp1}</div>:
+           el[0]==item.p2.wp3[0] && el[1]==item.p2.wp3[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp3')} className="chessKey">{wp1}</div>:
+           el[0]==item.p2.wp4[0] && el[1]==item.p2.wp4[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp4')} className="chessKey">{wp1}</div>:
+           el[0]==item.p2.wp5[0] && el[1]==item.p2.wp5[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp5')} className="chessKey">{wp1}</div>:
+           el[0]==item.p2.wp6[0] && el[1]==item.p2.wp6[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp6')} className="chessKey">{wp1}</div>:
+           el[0]==item.p2.wp7[0] && el[1]==item.p2.wp7[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp7')} className="chessKey">{wp1}</div>:
+           el[0]==item.p2.wp8[0] && el[1]==item.p2.wp8[1]?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp8')} className="chessKey">{wp1}</div>:     
+           el[0]==item.k2.w1[0] && el[1]==item.k2.w1[1]? <div onClick={(e)=>movebk1(e,el[0],el[1],'w1')} className="chessKey">{wk1}</div>:
+           el[0]==item.k2.w2[0] && el[1]==item.k2.w2[1]?<div onClick={(e)=>movebk2(e,el[0],el[1],'w2')} className="chessKey">{wk2}</div>:
+           el[0]==item.k2.w3[0] && el[1]==item.k2.w3[1]?<div onClick={(e)=>movebk3(e,el[0],el[1],'w3')} className="chessKey">{wk3}</div>:
+           el[0]==item.k2.w4[0] && el[1]==item.k2.w4[1]?<div onClick={(e)=>movebKing(e,el[0],el[1],'w4')} className="chessKey">{wk4}</div>:
+           el[0]==item.k2.w5[0] && el[1]==item.k2.w5[1]?<div onClick={(e)=>movebQueen(e,el[0],el[1],'w5')} className="chessKey">{wk5}</div>:
+           el[0]==item.k2.w6[0] && el[1]==item.k2.w6[1]?<div onClick={(e)=>movebk3(e,el[0],el[1],'w6')} className="chessKey">{wk6}</div>:
+           el[0]==item.k2.w7[0] && el[1]==item.k2.w7[1]?<div onClick={(e)=>movebk2(e,el[0],el[1],'w7')} className="chessKey">{wk7}</div>:
+           el[0]==item.k2.w8[0] && el[1]==item.k2.w8[1]?<div onClick={(e)=>movebk1(e,el[0],el[1],'w8')} className="chessKey">{wk8}</div>:
+           
+          ""}   
+        
+              
+              </div> 
+             </ToggleDiv>    
+    })}
+   </div> 
+ }
+
+
+    return <div>
+     <h3 className="head" style={{ color: 'Teal' }}>Chess</h3>
+     <FontAwesomeIcon icon={regularChessRook} />
+      <div style={{display:"flex", flexWrap:"wrap"}}>
+        <div style={{width:"30%"}}></div>
+         <div></div>
+      </div>
+      {renderUi()}
+    </div>
+};
+
+export default ChessBoard;
+
+
+
+interface ToggleDivProps {
+    bg: number; 
+    style:any;
+  }
+  
+  const ToggleDiv = styled.div<ToggleDivProps>`
+    background-color: ${props => (props.bg) %2==0 ? 'green' : 'wheat'};
+  `;
+
+ 
