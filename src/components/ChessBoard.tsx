@@ -3,7 +3,7 @@ import '../../public/css/chessboard.css'; // You can style the chess board in Ch
 import {useState, useEffect, ReactNode} from 'react'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { RookMoves1,KnightMoves1,bishopMoves1, blackKingMoves,blackQueenMoves,blackPawnMoves,whitePawnMoves} from './KeyMoves';
+import { RookMoves1,KnightMoves1,bishopMoves1, blackKingMoves,blackQueenMoves,blackPawnMoves,whitePawnMoves,updateMoveObj} from './KeyMoves';
 import { faChessQueen as regularChessQueen } from '@fortawesome/free-regular-svg-icons';
 import { faChessPawn as regularChessPawn} from '@fortawesome/free-regular-svg-icons';
 import { faChessRook as regularChessRook } from '@fortawesome/free-regular-svg-icons';
@@ -97,35 +97,17 @@ const obj={
 const ChessBoard = () => {
   const [item, setItem] = useState(obj); 
   const [validStp, setValidStp]:any = useState(null); 
-  const [key, setKey] = useState("b1"); 
-  const [crash, setCrash]= useState(false);
+  const [key, setKey] = useState("na"); 
+  const [flag, setFlag]= useState(1);
 
-  // const parentFun=(e:any, a:any,b:any,c:any)=>{
-  //   if(key=='na'){
-  //    if(c=='b1') movebk1(a,b,c)
-  //     if(c=='b2') movebk2(a,b,c)
-  //       if(c=='b3') movebk3(a,b,c)
-  //   }
-  //   else{
-  //     movebk(a,b,c)
-  //   }
-  // }
+ 
 
  useEffect(()=>{
-  localStorage.setItem("chessObj", JSON.stringify(item));
- 
+  localStorage.setItem("chessObj", JSON.stringify(item)); 
 },[item])
 
-const isKeyed=()=>{
-  if(key=='na'){
-    return false;
-  }else{
-  return true;
-  }
-  }
 
 const movebk=(a:any, b:any,c:any,)=>{
-
 let subArr:any=[a,b]
 const containsArray = validStp.some((el:any)=> {
   return el.length === subArr.length && el.every((value:any, index:any) => {
@@ -133,7 +115,6 @@ const containsArray = validStp.some((el:any)=> {
   });
 });
   if(key!='na' && containsArray){
- 
     let newObj= JSON.parse(JSON.stringify(item));
     if(key.includes('bp')) newObj={...newObj, p1:{...item.p1, [key]:[a,b]}} 
     else if(key.includes('wp')) newObj={...newObj, p2:{...item.p2, [key]:[a,b]}}
@@ -141,54 +122,100 @@ const containsArray = validStp.some((el:any)=> {
     else  newObj={...newObj, k2:{...item.k2, [key]:[a,b]}}
     setItem(newObj)
   }
- //setKey('na')
+ setKey('na')
  setValidStp(null)
 }
 const movebk1=(e:any,a:any, b:any,v:any)=>{
   e.stopPropagation();
-  if(key=='na'){
-    let res=RookMoves1(a,b);
-    console.log('vlidsteps',res)
+  if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
+    let res=RookMoves1(a,b,v);
       if(res.length>0){
       setKey(v)
       setValidStp(res)
-      console.log('res',res,v)
-      }
+      let newObj= JSON.parse(JSON.stringify(item));
+      setItem(newObj);
+  } 
+  } 
+  else{  
+    let newObj= JSON.parse(JSON.stringify(item));
+    let res=updateMoveObj(a, b,v, key,newObj)
+    setValidStp(null)
+    setItem(res);
+    setKey('na')
   }
-  
 }
+
 
 const movebk2=(e:any, a:any, b:any,v:any)=>{
   e.stopPropagation();
-  let res=KnightMoves1(a,b);
-  console.log("valid",res)
-  if(res.length>0){
-    setKey(v)
-  setValidStp(res)
-
+  if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
+    let res=KnightMoves1(a,b,v);
+      if(res.length>0){
+      setKey(v)
+      setValidStp(res)
+      let newObj= JSON.parse(JSON.stringify(item));
+      setItem(newObj);
+  } 
+  } 
+  else{  
+    let newObj= JSON.parse(JSON.stringify(item));
+    let res=updateMoveObj(a, b,v, key,newObj)
+    setValidStp(null)
+    setItem(res);
+    setKey('na')
   }
 }
-
 const movebk3=(e:any, a:any, b:any,v:any)=>{
  e.stopPropagation();
-  let res=bishopMoves1(a,b);
-  if(res.length>0){
-    setKey(v)
-  setValidStp(res)
+  // let res=bishopMoves1(a,b);
+  // if(res.length>0){
+  //   setKey(v)
+  // setValidStp(res)
+  // }
+  if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
+    let res=bishopMoves1(a,b,v);
+      if(res.length>0){
+      setKey(v)
+      setValidStp(res)
+      let newObj= JSON.parse(JSON.stringify(item));
+      setItem(newObj);
+  } 
+  } 
+  else{  
+    let newObj= JSON.parse(JSON.stringify(item));
+    let res=updateMoveObj(a, b,v, key,newObj)
+    setValidStp(null)
+    setItem(res);
+    setKey('na')
   }
 }
 
-const movebQueen=(e:any, a:any, b:any,key:any)=>{
+const movebQueen=(e:any, a:any, b:any,v:any)=>{
  e.stopPropagation();
-  let res=blackQueenMoves(a,b);
-  console.log('quees',res)
-  if(res.length>0){
-    setValidStp(res);
-    setKey(key)
-   
+  // let res=blackQueenMoves(a,b,v);
+  // console.log('quees',res)
+  // if(res.length>0){
+  //   setValidStp(res);
+  //   setKey(key)
+  // }
+  if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
+    let res=blackQueenMoves(a,b,v);
+      if(res.length>0){
+      setKey(v)
+      setValidStp(res)
+      let newObj= JSON.parse(JSON.stringify(item));
+      setItem(newObj);
+  } 
+  } 
+  else{  
+    let newObj= JSON.parse(JSON.stringify(item));
+    let res=updateMoveObj(a, b,v, key,newObj)
+    setValidStp(null)
+    setItem(res);
+    setKey('na')
   }
 }
-const movebKing=(e:any, a:any, b:any,key:any)=>{
+const movebKing=(e:any, a:any, b:any,v:any)=>{
  e.stopPropagation();
   let res=blackKingMoves(a,b);
 
@@ -199,62 +226,47 @@ const movebKing=(e:any, a:any, b:any,key:any)=>{
   }
 }
 
-// 3 2 bp3
+console.log('valid',validStp,key,item)
+
+
 const movebPawn=(e:any,a:any, b:any,v:any)=>{
-  console.log('first',a,b,v,key)
+  //debugger
   e.stopPropagation();
+  let f=1;
+  console.log('pawn',a,b,validStp,key,v)
+  if(validStp){
+    validStp.map((el:any)=>{
+      if(el[0]==a && el[1]==b){
+        f=2
+       combat(a,b,v,key)
+       return;
+      }
+   })
+  }
+ if(f==2){
+  return;
+ }
   let res;
-  
     if(v.includes("bp")) res=blackPawnMoves(a,b);
     else res= whitePawnMoves(a,b)
-  if(crash){
-    combat(a,b,v,key)
-  }else{
-    if(res.length>1){
-      setKey(v);
-      setCrash(true)
-      setValidStp(res);
-    }else{
-      setKey(v);
-      setCrash(false);
-      setValidStp(res);
-    }
-  }
-
-  console.log('second',a,b,v,key)
+      setKey(v);    
+       setFlag(2)
+       setValidStp(res);
 }
-console.log('out',key,crash)
-
-
 
 const combat=(a:any, b:any,v:any, key:any)=>{
-  let newObj= JSON.parse(JSON.stringify(item));
-  console.log('comb',a,b,'v=',v,key,newObj)
-  console.log( 'comp',newObj.p1[v],newObj.p2[key])  //newObj. p1[v] ==newObj.p2[key]\
-  for(let i in newObj){
-  // console.log('i',i, newObj[i])
-    for(let j in newObj[i]){
-     //console.log('j',j, newObj[i][j])
-  
-      if(j==key){
-        console.log('j',j, key,v, newObj['p1'][v], newObj['p1']['bp3'],newObj[i][v])
-        // let newObj1= {...newObj[i],[key]:newObj[i][v]}
-        // newObj1={...newObj, [newObj[i]]:newObj1}
-        // if(key.includes('wp')) newObj={...newObj, [newObj['p1']]:{...newObj['p1'],[j]:newObj['p1'][v]}}
-        // else newObj={...newObj, [newObj['p2']]:{...newObj['p2'],[j]:newObj['p2'][v]}}
-        console.log('newo1',newObj)
-      }
-   
-    }
-  }
-// newObj.p2[key] =  newObj.p1[v]
-// newObj.p1[v]=[-1,-1]
- 
-  setCrash(false)
-  setValidStp(null) 
-  setItem(newObj)
+  debugger
+  let newObj= JSON.parse(JSON.stringify(item)); 
+  var res=updateMoveObj(a, b,v, key,newObj)
+  console.log('comb',item)
+   setItem(res)
+   setFlag(2)
+   setValidStp(null) 
+  setKey('na')
 }
 console.log("item",item)
+
+
  const renderUi=()=>{
    return <div style={{ width:"60%", margin:"auto", display:"flex", flexWrap:"wrap"}} className='Ch'>
  {board.map((el:any)=>{

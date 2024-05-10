@@ -1,13 +1,6 @@
 
-body{
-    border:2px solid red;
-}
-.ch{
-    border:2px solid brown;
-}
 .chessKey{
     padding:1rem 0px 0px 0.8rem;
     font-size: 2rem;
-    border:2px solid red;
     height:6rem;
 }
