@@ -447,7 +447,7 @@ console.log('item',item)
      <h1 className="head" style={{ color: 'White',margin:'0.5rem 1rem 1rem 1rem', fontSize:'2rem',paddingTop:'0rem'}}> Chess</h1>
      <FontAwesomeIcon icon={solidChessKing} style={{color:'white',position:'relative',top:'0.5rem', fontSize:'2rem'}} />
      </div>
-   
+     <span style={{color:'white',fontSize:'10px'}}><b style={{color:'yellow'}}>suggestion:</b> start with white</span>
       <div style={{display:"flex", flexWrap:"wrap"}}>
       <div>
          {renderUi()}
