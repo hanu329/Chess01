@@ -1,9 +1,10 @@
 
 import '../../public/css/chessboard.css'; // You can style the chess board in ChessBoard.css
-import {useState, useEffect, ReactNode} from 'react'
+import {useState, useEffect} from 'react'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { RookMoves1,KnightMoves1,bishopMoves1, blackKingMoves,blackQueenMoves,blackPawnMoves,whitePawnMoves,updateMoveObj} from './KeyMoves';
+import { RookMoves1,KnightMoves1,bishopMoves1, blackKingMoves,blackQueenMoves,blackPawnMoves,
+  whitePawnMoves,updateMoveObj,isKingSafe,isKingSafe1,isKingDead} from './KeyMoves';
 import { faChessQueen as regularChessQueen } from '@fortawesome/free-regular-svg-icons';
 import { faChessPawn as regularChessPawn} from '@fortawesome/free-regular-svg-icons';
 import { faChessRook as regularChessRook } from '@fortawesome/free-regular-svg-icons';
@@ -60,7 +61,7 @@ const blackKey={
 
 const whiteKey={
   w1:[7,0],
-  w2:[7,1],
+  w2:[7,1],   
   w3:[7,2],
   w4:[7,3],
   w5:[7,4],
@@ -94,21 +95,40 @@ const obj={
   k2:whiteKey,
   p2:whitePawn
 }
+
 const ChessBoard = () => {
   const [item, setItem] = useState(obj); 
   const [validStp, setValidStp]:any = useState(null); 
   const [key, setKey] = useState("na"); 
-  const [flag, setFlag]= useState(1);
-
+ const [turn, setTurn] =useState(0)
  
 
  useEffect(()=>{
   localStorage.setItem("chessObj", JSON.stringify(item)); 
+  console.log('item',item)
+  
+  let ch=isKingSafe(item)
+  console.log('ch',ch)
+  if(!ch[0]){
+    let f=isKingDead(item,turn)
+    if(f){
+      if(turn==1) alert('white is winner')
+        else alert('black is winner')
+    }
+  }
+ 
 },[item])
 
 
-const movebk=(a:any, b:any,c:any,)=>{
-let subArr:any=[a,b]
+const turncheck=()=>{
+  if(turn==0 && key.includes('w') || turn==1 && key.includes('b')) return true;
+
+  else return false;
+}
+
+const movebk=(a:any, b:any,c:any)=>{
+  if(turncheck()){
+    let subArr:any=[a,b]
 const containsArray = validStp.some((el:any)=> {
   return el.length === subArr.length && el.every((value:any, index:any) => {
     return value === subArr[index];
@@ -116,31 +136,75 @@ const containsArray = validStp.some((el:any)=> {
 });
   if(key!='na' && containsArray){
     let newObj= JSON.parse(JSON.stringify(item));
-    if(key.includes('bp')) newObj={...newObj, p1:{...item.p1, [key]:[a,b]}} 
-    else if(key.includes('wp')) newObj={...newObj, p2:{...item.p2, [key]:[a,b]}}
-    else if(key.length==2 && key.includes('b')) newObj={...newObj, k1:{...item.k1, [key]:[a,b]}}
-    else  newObj={...newObj, k2:{...item.k2, [key]:[a,b]}}
-    setItem(newObj)
+    if(key.includes('bp')) newObj={...newObj, p1:{...newObj.p1, [key]:[a,b]}} 
+    else if(key.includes('wp')) newObj={...newObj, p2:{...newObj.p2, [key]:[a,b]}}
+    else if(key.length==2 && key.includes('b')) newObj={...newObj, k1:{...newObj.k1, [key]:[a,b]}}
+    else  newObj={...newObj, k2:{...newObj.k2, [key]:[a,b]}}
+   //c==2 blackchecked
+    let ch=isKingSafe1(newObj,turn)
+  console.log('chhhs',ch,key,turn)
+ 
+   if(!ch && key.includes('w')){
+      setItem(newObj)
+      {turn==0?setTurn(1):setTurn(0)}
+    } 
+     else if(!ch && key.includes('b')){
+      setItem(newObj)
+      {turn==0?setTurn(1):setTurn(0)}
+    }  
+     else {
+              setItem(newObj)
+              {turn==0?setTurn(1):setTurn(0)}
+            };
+          
+    // if(!ch[0] && ch[1]==2 && key.includes('w')){
+    //   setItem(newObj)
+    //   {turn==0?setTurn(1):setTurn(0)}
+    // } 
+    //  else if(!ch[0] && ch[1]==3 && key.includes('b')){
+    //   setItem(newObj)
+    //   {turn==0?setTurn(1):setTurn(0)}
+    // } 
+    //        else if(ch[0]){
+    //         setItem(newObj)
+    //         {turn==0?setTurn(1):setTurn(0)}
+    //       };
   }
  setKey('na')
+ 
  setValidStp(null)
+  }
+
 }
 const movebk1=(e:any,a:any, b:any,v:any)=>{
   e.stopPropagation();
   if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
-    let res=RookMoves1(a,b,v);
+    let res=RookMoves1(item,a,b,v);
       if(res.length>0){
       setKey(v)
       setValidStp(res)
-      let newObj= JSON.parse(JSON.stringify(item));
-      setItem(newObj);
-  } 
+      }
   } 
   else{  
     let newObj= JSON.parse(JSON.stringify(item));
     let res=updateMoveObj(a, b,v, key,newObj)
+    //if kingsafe then update else refuse
     setValidStp(null)
-    setItem(res);
+    let ch=isKingSafe(res)
+      console.log('chhhs',ch,key,turn)
+
+        if(!ch[0] && ch[1]==2 && key.includes('w')){
+          setItem(res)
+          {turn==0?setTurn(1):setTurn(0)}
+        } 
+         else if(!ch[0] && ch[1]==3 && key.includes('b')){
+          setItem(res)
+          {turn==0?setTurn(1):setTurn(0)}
+        } 
+               else if(ch[0]){
+                setItem(res)
+                {turn==0?setTurn(1):setTurn(0)}
+              };
     setKey('na')
   }
 }
@@ -149,91 +213,139 @@ const movebk1=(e:any,a:any, b:any,v:any)=>{
 const movebk2=(e:any, a:any, b:any,v:any)=>{
   e.stopPropagation();
   if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
-    let res=KnightMoves1(a,b,v);
+    let res=KnightMoves1(item,a,b,v);
       if(res.length>0){
       setKey(v)
       setValidStp(res)
-      let newObj= JSON.parse(JSON.stringify(item));
-      setItem(newObj);
   } 
   } 
   else{  
     let newObj= JSON.parse(JSON.stringify(item));
     let res=updateMoveObj(a, b,v, key,newObj)
     setValidStp(null)
-    setItem(res);
+    //if kingsafe then update else refuse
+    let ch=isKingSafe(res)
+      console.log('chhhs',ch,key,turn)
+
+        if(!ch[0] && ch[1]==2 && key.includes('w')){
+          setItem(res)
+          {turn==0?setTurn(1):setTurn(0)}
+        } 
+         else if(!ch[0] && ch[1]==3 && key.includes('b')){
+          setItem(res)
+          {turn==0?setTurn(1):setTurn(0)}
+        } 
+               else if(ch[0]){
+                setItem(res)
+                {turn==0?setTurn(1):setTurn(0)}
+              };
     setKey('na')
   }
 }
 const movebk3=(e:any, a:any, b:any,v:any)=>{
  e.stopPropagation();
-  // let res=bishopMoves1(a,b);
-  // if(res.length>0){
-  //   setKey(v)
-  // setValidStp(res)
-  // }
   if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
-    let res=bishopMoves1(a,b,v);
+    let res=bishopMoves1(item,a,b,v);
       if(res.length>0){
       setKey(v)
       setValidStp(res)
-      let newObj= JSON.parse(JSON.stringify(item));
-      setItem(newObj);
   } 
   } 
   else{  
     let newObj= JSON.parse(JSON.stringify(item));
     let res=updateMoveObj(a, b,v, key,newObj)
     setValidStp(null)
-    setItem(res);
+    //if kingsafe then update else refuse
+    let ch=isKingSafe(res)
+      console.log('chhhs',ch,key,turn)
+
+        if(!ch[0] && ch[1]==2 && key.includes('w')){
+          setItem(res)
+          {turn==0?setTurn(1):setTurn(0)}
+        } 
+         else if(!ch[0] && ch[1]==3 && key.includes('b')){
+          setItem(res)
+          {turn==0?setTurn(1):setTurn(0)}
+        } 
+               else if(ch[0]){
+                setItem(res)
+                {turn==0?setTurn(1):setTurn(0)}
+              };
     setKey('na')
   }
 }
 
 const movebQueen=(e:any, a:any, b:any,v:any)=>{
+ // console.log('init',v)
  e.stopPropagation();
-  // let res=blackQueenMoves(a,b,v);
-  // console.log('quees',res)
-  // if(res.length>0){
-  //   setValidStp(res);
-  //   setKey(key)
-  // }
   if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
-    let res=blackQueenMoves(a,b,v);
+    let res=blackQueenMoves(item,a,b,v);
       if(res.length>0){
       setKey(v)
       setValidStp(res)
-      let newObj= JSON.parse(JSON.stringify(item));
-      setItem(newObj);
+  } 
+  } 
+  else{  
+    let newObj= JSON.parse(JSON.stringify(item));
+    let res=updateMoveObj(a, b,v, key,newObj)
+   
+    setValidStp(null)
+    //if kingsafe then update else refuse
+    let ch=isKingSafe(res)
+    //console.log('chhhs',ch,key,turn)
+
+      if(!ch[0] && ch[1]==2 && key.includes('w')){
+        setItem(res)
+        {turn==0?setTurn(1):setTurn(0)}
+      } 
+       else if(!ch[0] && ch[1]==3 && key.includes('b')){
+        setItem(res)
+        {turn==0?setTurn(1):setTurn(0)}
+      } 
+             else if(ch[0]){
+              setItem(res)
+              {turn==0?setTurn(1):setTurn(0)}
+            };
+    setKey('na')
+  }
+}
+const movebKing=(e:any, a:any, b:any,v:any)=>{
+ e.stopPropagation();
+
+  if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
+    let res=blackKingMoves(item,a,b,v);
+      if(res.length>0){
+      setKey(v)
+      setValidStp(res)
   } 
   } 
   else{  
     let newObj= JSON.parse(JSON.stringify(item));
     let res=updateMoveObj(a, b,v, key,newObj)
     setValidStp(null)
-    setItem(res);
+    let ch=isKingSafe(res)
+
+      if(!ch[0] && ch[1]==2 && key.includes('w')){
+        setItem(res)
+        {turn==0?setTurn(1):setTurn(0)}
+      } 
+       else if(!ch[0] && ch[1]==3 && key.includes('b')){
+        setItem(res)
+        {turn==0?setTurn(1):setTurn(0)}
+      } 
+             else if(ch[0]){
+              setItem(res)
+              {turn==0?setTurn(1):setTurn(0)}
+            };
     setKey('na')
   }
 }
-const movebKing=(e:any, a:any, b:any,v:any)=>{
- e.stopPropagation();
-  let res=blackKingMoves(a,b);
-
-  if(res.length>0){
-    setValidStp(res);
-    setKey(key)
-   
-  }
-}
-
-console.log('valid',validStp,key,item)
-
 
 const movebPawn=(e:any,a:any, b:any,v:any)=>{
-  //debugger
+  //
   e.stopPropagation();
   let f=1;
-  console.log('pawn',a,b,validStp,key,v)
+  //console.log('pawn',a,b,validStp,key,v)
   if(validStp){
     validStp.map((el:any)=>{
       if(el[0]==a && el[1]==b){
@@ -247,29 +359,42 @@ const movebPawn=(e:any,a:any, b:any,v:any)=>{
   return;
  }
   let res;
-    if(v.includes("bp")) res=blackPawnMoves(a,b);
-    else res= whitePawnMoves(a,b)
+    if(v.includes("bp")) res=blackPawnMoves(item,a,b,v);
+    else res= whitePawnMoves(item,a,b,v)
       setKey(v);    
-       setFlag(2)
+      // setFlag(2)
        setValidStp(res);
 }
-
+//console.log('validdd',validStp)
 const combat=(a:any, b:any,v:any, key:any)=>{
-  debugger
+  
   let newObj= JSON.parse(JSON.stringify(item)); 
   var res=updateMoveObj(a, b,v, key,newObj)
-  console.log('comb',item)
-   setItem(res)
-   setFlag(2)
+  //if kingsafe then update else refuse
+  let ch=isKingSafe(res)
+     // console.log('chhhs',ch,key,turn)
+        
+        if(!ch[0] && ch[1]==2 && key.includes('w')){
+          setItem(res)
+          {turn==0?setTurn(1):setTurn(0)}
+        } 
+         else if(!ch[0] && ch[1]==3 && key.includes('b')){
+          setItem(res)
+          {turn==0?setTurn(1):setTurn(0)}
+        } 
+               else if(ch[0]){
+                setItem(res)
+                {turn==0?setTurn(1):setTurn(0)}
+              };
+   //setFlag(2)
    setValidStp(null) 
   setKey('na')
 }
-console.log("item",item)
 
-
+console.log('item',item)
  const renderUi=()=>{
-   return <div style={{ width:"60%", margin:"auto", display:"flex", flexWrap:"wrap"}} className='Ch'>
- {board.map((el:any)=>{
+   return <div className='contDiv'>
+ {board && item && board.map((el:any)=>{
              return  <ToggleDiv onClick={()=>movebk(el[0],el[1],'c')} key={el[0]+""+el[1]+1} id={el[0]+""+el[1]+2} bg={el[0]+el[1]} style={{width:"12%", height:"4.6rem"}}>
              <div id={el[0]+""+el[1]} > 
            {el[0]==item.k1.b1[0] && el[1]==item.k1.b1[1]? <div onClick={(e)=>movebk1(e,el[0],el[1],'b1')} className="chessKey">{bk1}</div>:
@@ -317,16 +442,23 @@ console.log("item",item)
 
 
     return <div>
-     <h3 className="head" style={{ color: 'Teal' }}>Chess</h3>
-     <FontAwesomeIcon icon={regularChessRook} />
+     <div className='container'>
+     <FontAwesomeIcon icon={regularChessKing} style={{color:'white',position:'relative',top:'0.5rem', fontSize:'2rem'}} />
+     <h1 className="head" style={{ color: 'White',margin:'0.5rem 1rem 1rem 1rem', fontSize:'2rem',paddingTop:'0rem'}}> Chess</h1>
+     <FontAwesomeIcon icon={solidChessKing} style={{color:'white',position:'relative',top:'0.5rem', fontSize:'2rem'}} />
+     </div>
+   
       <div style={{display:"flex", flexWrap:"wrap"}}>
+      <div>
+         {renderUi()}
+         </div>
         <div style={{width:"30%"}}></div>
-         <div></div>
+        
       </div>
-      {renderUi()}
+    
     </div>
 };
-
+//here adding data 
 export default ChessBoard;
 
 
