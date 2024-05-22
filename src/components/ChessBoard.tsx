@@ -358,7 +358,7 @@ console.log('item',item)
    return <div className='contDiv'>
  {board && item && board.map((el:any)=>{
              return  <ToggleDiv onClick={()=>movebk(el[0],el[1],'c')} key={el[0]+""+el[1]+1} id={el[0]+""+el[1]+2} bg={el[0]+el[1]} className='toggleDiv1' style={{}}>
-             <div id={el[0]+""+el[1]} > 
+             <div id={el[0]+""+el[1]} className='tdDiv'> 
            {el[0]==item.k1.b1[0] && el[1]==item.k1.b1[1] &&flag==3? <div onClick={(e)=>movebk1(e,el[0],el[1],'b1')} className="chessKey">{bk1}</div>:
            el[0]==item.k1.b1[0] && el[1]==item.k1.b1[1] && flag==2? <div className="chessKey"></div>:
            el[0]==item.k1.b2[0] && el[1]==item.k1.b2[1]&& flag==3?<div onClick={(e)=>movebk2(e,el[0],el[1],'b2')} className="chessKey">{bk2}</div>:
@@ -485,6 +485,7 @@ interface ToggleDivProps {
   
   const ToggleDiv = styled.div<ToggleDivProps>`
     background-color: ${props => (props.bg) %2==0 ? 'green' : 'wheat'};
+   
   `;
 
  

@@ -1,7 +1,7 @@
 
 .container{
   display:flex;
-  margin-left:10rem;
+  margin-left:10vw;
 }
 .k1{
   color:white;
@@ -34,23 +34,30 @@
 }
 
 .mainDiv{
-  /* border:2px solid red; */
+ 
   display:flex;
   flex-wrap:wrap;
+  height:80vh;
+}
+.mainDiv>div{
+  height:80vh;
 }
 
-.contDiv{ width:45%;
+.contDiv{ 
+       width:45%;
       margin-left:3rem;
       display:flex;
-      flex-wrap:wrap
+      flex-wrap:wrap;
+     
     }
   
-    .boardDiv{width:8%;
-         height:5vw
+    .boardDiv{
+         width:8%;
+         height:5vh
         }
         body{background-color: teal;}
 .chessKey{
-  /* border:1px solid red; */
+
     padding:1vw 0px 0px 1.6vw;
     font-size: 2.5vw;
     height:4rem;
@@ -66,40 +73,41 @@
 }
 
 @media screen and (max-width:30rem) {
-  .contDiv{
-    margin-left:0px;
-
+  .ccontainer{
+    margin-left:2vw;
   }
+ 
   .span{
     color:white;
     font-size:10px;
     margin-left:0rem
   }
   .toggleDiv1{
-    width:12%;height:4.6vh;
+    width:12%;
+    height:7vh;
   }
   .mainDiv{
-    margin-top:20vh;
+   
     display:block;
-    height:85vh;
-    /* flex-wrap:wrap; */
-  }
-  .mainDiv>div{
-    /* border: 4px solid yellow; */
-    width:100%;
+    height:50vh;
+ 
   }
   .contDiv{
+    margin-top:3vw;
     width:100%;
+    margin-left:0px;
   }
   .chessKey{
-     /* border:1px solid red;  */
+     
       padding:3vw;
-      font-size: 3.5vw;
+      font-size: 4vw;
       height:4vh;
   }
   
 }
 button{
+  position:relative;
+  top:20vw;
   margin:1rem;
 }
 button:active{
@@ -108,36 +116,32 @@ button:active{
 }
 
 @media screen and (min-width:30rem) and (max-width:40rem){
-  .contDiv{
-    margin-left:0px;
 
-  }
+
   .span{
     color:white;
     font-size:10px;
-    margin-left:0rem
+    margin-left:0rem;
+    margin-bottom:5vw;
   }
   .toggleDiv1{
-    width:12%;height:5vh;
+    width:12%;height:8vh;
   }
   .mainDiv{
+    margin-top:5vw;
     display:block;
-    /* flex-wrap:wrap; */
-  }
-  .mainDiv>div{
-    /* border: 4px solid yellow; */
-    margin-top:20vh;
-    width:100%;
-    height: 90vh;
+   height:50vh;
   }
   .contDiv{
+    margin-top:3vw;
     width:100%;
+    margin-left: 0px;
   }
   .chessKey{
-     /* border:1px solid red;  */
+   
       padding-left:4vw;
       font-size: 3vw;
-      height:2vh;
+      height:4vh;
   }
   
 }
