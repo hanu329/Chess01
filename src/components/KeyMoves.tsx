@@ -1,72 +1,5 @@
 
 
-interface AnyObject {
-    [key: string]: any;
-}
-
-const blackKey: AnyObject = {
-    b1: [0, 0],
-    b2: [0, 1],
-    b3: [0, 2],
-    b4: [0, 3],
-    b5: [0, 4],
-    b6: [0, 5],
-    b7: [0, 6],
-    b8: [0, 7]
-};
-
-const whiteKey: AnyObject = {
-    w1: [7, 0],
-    w2: [7, 1],
-    w3: [7, 2],
-    w4: [7, 3],
-    w5: [7, 4],
-    w6: [7, 5],
-    w7: [7, 6],
-    w8: [7, 7]
-};
-
-const blackPawn: AnyObject = {
-    bp1: [1, 0],
-    bp2: [1, 1],
-    bp3: [1, 2],
-    bp4: [1, 3],
-    bp5: [1, 4],
-    bp6: [1, 5],
-    bp7: [1, 6],
-    bp8: [1, 7]
-};
-
-const whitePawn: AnyObject = {
-    wp1: [6, 0],
-    wp2: [6, 1],
-    wp3: [6, 2],
-    wp4: [6, 3],
-    wp5: [6, 4],
-    wp6: [6, 5],
-    wp7: [6, 6],
-    wp8: [6, 7]
-};
-
-const obj: AnyObject = {
-    k1: blackKey,
-    p1: blackPawn,
-    k2: whiteKey,
-    p2: whitePawn
-};
-
-function isVacant(a:any, b:any) {
-    let obj1:any=JSON.parse(localStorage.chessObj);
-    for (const propKey in obj1) {
-        const prop = obj1[propKey];
-        for (const key in prop) {
-            if (Array.isArray(prop[key]) && prop[key][0] === a && prop[key][1] === b) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
 
 function isVacant1(a:any, b:any,v:any) {
     let obj1:any=JSON.parse(localStorage.chessObj);
@@ -134,20 +67,18 @@ function isVacantA(obj1:any,a:any, b:any,v:any) {
     }
     return 3;
 }
+
 export const RookMoves1=(obj1:any,a:any,b:any,c:any)=>{
 
   let validSteps= [] 
-  let k=1; 
-   let z='bp'+(b+1);  
-   //let obj1:any=JSON.parse(localStorage.chessObj);
+console.log(obj1)
 
     for(let i=a+1; i<8; i++){
       
         if(i>=0&&i<8){
            // console.log(i,b,isVacant(i,b))
        if(isVacant2(i,b,c)==3) validSteps.push([i,b]) 
-        else if(k==1 && isVacant2(i,b,c)==2){
-    k=2;
+        else if(isVacant2(i,b,c)==2){
     validSteps.push([i,b]);  
     break;     
         } 
@@ -158,10 +89,8 @@ export const RookMoves1=(obj1:any,a:any,b:any,c:any)=>{
    
     for(let i=a-1; i>=0; i--){
         if(i>=0&&i<8){
-            let res=isVacant2(i,b,c)
             if(isVacant2(i,b,c)==3) validSteps.push([i,b]) 
-                else if(k==1 && isVacant2(i,b,c)==2){
-                    k=2;
+                else if(isVacant2(i,b,c)==2){
                     validSteps.push([i,b]);  
                     break;     
                         }
@@ -172,8 +101,7 @@ export const RookMoves1=(obj1:any,a:any,b:any,c:any)=>{
             for(let i=b+1; i<8; i++){
                 if(i>=0&&i<8){
                     if(isVacant2(a,i,c)==3) validSteps.push([a,i]) 
-                        else if(k==1 && isVacant2(a,i,c)==2){
-                            k=2;
+                        else if(isVacant2(a,i,c)==2){
                                     validSteps.push([i,b]);  
                                     break;     
                                         }
@@ -184,8 +112,7 @@ export const RookMoves1=(obj1:any,a:any,b:any,c:any)=>{
                     for(let i=b-1; i>=0; i--){
                         if(i>=0&&i<8){
                             if(isVacant2(a,i,c)==3) validSteps.push([a,i]) 
-                                else if(k==1 && isVacant2(a,i,c)==2){
-                                    k=2;
+                                else if(isVacant2(a,i,c)==2){                                   
                                             validSteps.push([i,b]);  
                                             break;     
                                                 }
@@ -193,7 +120,7 @@ export const RookMoves1=(obj1:any,a:any,b:any,c:any)=>{
                         }
                             }
                            
-                           // console.log('vnew',validSteps)
+                            console.log('rookkk',validSteps)
                            return validSteps;
 }
 
@@ -214,6 +141,7 @@ export const KnightMoves1=(obj1:any,a:any, b:any,v:any)=>{
 }
 
 export const bishopMoves1=(obj1:any,a:any, b:any,v:any)=>{
+    console.log(obj1)
     let validSteps=[]
     let c=a;
     let d=b;
@@ -267,7 +195,7 @@ export const bishopMoves1=(obj1:any,a:any, b:any,v:any)=>{
         else break;
 
    }
-   console.log('validStep',validSteps)
+   console.log('bishoop',validSteps)
    return validSteps;
 }
 
@@ -278,7 +206,7 @@ let validSteps=[]
 for(let i=a+1; i<8; i++){
     if(i>=0&&i<8){
         if(isVacant2(i,b,v)==3) validSteps.push([i,b]) 
-            else  if(isVacant2(i,b,v)==2){
+            else if(isVacant2(i,b,v)==2){
                 validSteps.push([i,b]); break;
         } 
             else break;
@@ -375,7 +303,7 @@ for(let i=a-1; i>=0; i--){
 }
 
 export const blackKingMoves=(obj1:any,a:any, b:any,c:any)=>{
-console.log('a',a,b)
+    console.log(obj1)
    let validSteps=[]; 
    if(!isVacant1(a-1,b,c) && a-1>=0) validSteps.push([a-1,b])
    if(!isVacant1(a+1,b,c) && a+1<8) validSteps.push([a+1,b])
@@ -390,7 +318,7 @@ console.log('a',a,b)
 }
 
 export const blackPawnMoves=(obj1:any,a:any, b:any,c:any)=>{
-  
+    console.log(obj1)
 let validSteps=[]
    if(isVacant2(a+1,b,c)==3 && a+1<8) validSteps.push([a+1,b])
       if(isVacant2(a+1,b-1,c)==2 && a+1<8 && b-1>=0) validSteps.push([a+1,b-1])
@@ -401,13 +329,14 @@ let validSteps=[]
 
 export const whitePawnMoves=(obj1:any,a:any, b:any,c:any)=>{
     let validSteps=[]
+    console.log(obj1)
     if(isVacant2(a-1,b,c)==3 && a-1>=0) validSteps.push([a-1,b])
         if(isVacant2(a-1,b-1,c)==2 && a-1<8 && b-1>=0) validSteps.push([a-1,b-1])
             if(isVacant2(a-1,b+1,c)==2 && a+1<8 && b+1<8) validSteps.push([a-1,b+1])
                
         return validSteps;
 }
-
+ 
 
 
 export const updateMoveObj=(a:any, b:any,v:any, key:any,  boardObj:any)=>{
@@ -656,98 +585,6 @@ export const isKingSafe=(obj1:any)=>{
    return [true];
 }
 
-
-export const GrossValidArr2=(obj1:any)=>{
-    // console.log('ggg',obj1)
-     let bKA=[]
-     let bPA=[]
-     let wKA=[]
-     let wPA=[]
-     //find position of each then invoke it for each
-     //let obj1:any=JSON.parse(localStorage.chessObj);
-     let bK1=obj1.k1.b1;
-     let bK2=obj1.k1.b2;
-     let bK3=obj1.k1.b3;
-     let bK4=obj1.k1.b4;
-     let bK5=obj1.k1.b5;
-     let bK6=obj1.k1.b6;
-     let bK7=obj1.k1.b7;
-     let bK8=obj1.k1.b8;
- 
-     let bP1=obj1.p1.bp1;
-     let bP2=obj1.p1.bp2;
-     let bP3=obj1.p1.bp3;
-     let bP4=obj1.p1.bp4;
-     let bP5=obj1.p1.bp5;
-     let bP6=obj1.p1.bp6;
-     let bP7=obj1.p1.bp7;
-     let bP8=obj1.p1.bp8;
- 
-     ////
-     let wK1=obj1.k2.w1;
-     let wK2=obj1.k2.w2;
-     let wK3=obj1.k2.w3;
-     let wK4=obj1.k2.w4;
-     let wK5=obj1.k2.w5;
-     let wK6=obj1.k2.w6;
-     let wK7=obj1.k2.w7;
-     let wK8=obj1.k2.w8;
- 
-     let wP1=obj1.p2.wp1;
-     let wP2=obj1.p2.wp2;
-     let wP3=obj1.p2.wp3;
-     let wP4=obj1.p2.wp4;
-     let wP5=obj1.p2.wp5;
-     let wP6=obj1.p2.wp6;
-     let wP7=obj1.p2.wp7;
-     let wP8=obj1.p2.wp8;
-     ////
-    let bk1= RookMoves1(obj1,bK1[0],bK1[1],'b1')
-    let bk8= RookMoves1(obj1,bK8[0],bK8[1],'b8')
-    let bk2= KnightMoves1(obj1,bK2[0],bK2[1],'b2')
-    let bk7= KnightMoves1(obj1,bK7[0],bK7[1],'b7')
-    let bk3= bishopMoves1(obj1,bK3[0],bK3[1],'b3')
-    let bk6= bishopMoves1(obj1,bK6[0],bK6[1],'b6')
-    let bk4= blackKingMoves(obj1,bK4[0],bK4[1],'b4')
-    let bk5= blackQueenMoves(obj1,bK5[0],bK5[1],'b5')
-    
-    let bp1=blackPawnMoves(obj1,bP1[0],bP1[1],'bp1')
-    let bp2=blackPawnMoves(obj1,bP2[0],bP2[1],'bp2')
-    let bp3=blackPawnMoves(obj1,bP3[0],bP3[1],'bp3')
-    let bp4=blackPawnMoves(obj1,bP4[0],bP4[1],'bp4')
-    let bp5=blackPawnMoves(obj1,bP5[0],bP5[1],'bp5')
-    let bp6=blackPawnMoves(obj1,bP6[0],bP6[1],'bp6')
-    let bp7=blackPawnMoves(obj1,bP7[0],bP7[1],'bp7')
-    let bp8=blackPawnMoves(obj1,bP8[0],bP8[1],'bp8')
-   
- ////
- let wk1= RookMoves1(obj1,wK1[0],wK1[1],'w1')
- let wk8= RookMoves1(obj1,wK8[0],wK8[1],'w8')
- let wk2= KnightMoves1(obj1,wK2[0],wK2[1],'w2')
- let wk7= KnightMoves1(obj1,wK7[0],wK7[1],'w7')
- let wk3= bishopMoves1(obj1,wK3[0],wK3[1],'w3')
- let wk6= bishopMoves1(obj1,wK6[0],wK6[1],'w6')
- let wk4= blackKingMoves(obj1,wK4[0],wK4[1],'w4')
- let wk5= blackQueenMoves(obj1,wK5[0],wK5[1],'w5')
- 
-   
- let wp1=whitePawnMoves(obj1,wP1[0],wP1[1],'wp1')
- let wp2=whitePawnMoves(obj1,wP2[0],wP2[1],'wp2')
- let wp3=whitePawnMoves(obj1,wP3[0],wP3[1],'wp3')
- let wp4=whitePawnMoves(obj1,wP4[0],wP4[1],'wp4')
- let wp5=whitePawnMoves(obj1,wP5[0],wP5[1],'wp5')
- let wp6=whitePawnMoves(obj1,wP6[0],wP6[1],'wp6')
- let wp7=whitePawnMoves(obj1,wP7[0],wP7[1],'wp7')
- let wp8=whitePawnMoves(obj1,wP8[0],wP8[1],'wp8')
-obj.k1.b1=bk1; obj.k1.b2=bk2; obj.k1.b3=bk3; obj.k1.b4=bk4; obj.k1.b5=bk5; obj.k1.b6=bk6; obj.k1.b7=bk7; obj.k1.b8=bk8;
-obj.p1.bp1=bp1; obj.p1.bp2=bp2; obj.p1.bp3=bp3;obj.p1.bp4=bp4;obj.p1.bp5=bp5;obj.p1.bp6=bp6;obj.p1.bp7=bp7;obj.p1.bp8=bp8;
-obj.k2.w1=wk1; obj.k2.w2=wk2; obj.k2.w3=wk3; obj.k2.w4=wk4; obj.k2.w5=wk5; obj.k2.w6=wk6; obj.k2.w7=wk7; obj.k2.w8=wk8;
-obj.p2.wp1=wp1; obj.p2.wp2=wp2; obj.p2.wp3=wp3;obj.p2.wp4=wp4;obj.p2.wp5=wp5;obj.p2.wp6=wp6;obj.p2.wp7=wp7;obj.p2.wp8=wp8;
-    return obj
- }
-//  const isKingSafe1=(obj1:any,turn:any)=>{
-//     return true;
-//  }
 
 
  export const isKingSafe1=(obj1:any,turn:any)=>{

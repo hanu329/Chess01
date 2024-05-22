@@ -127,6 +127,7 @@ const turncheck=()=>{
 }
 
 const movebk=(a:any, b:any,c:any)=>{
+  console.log(c)
   if(turncheck()){
     let subArr:any=[a,b]
 const containsArray = validStp.some((el:any)=> {
@@ -395,7 +396,7 @@ console.log('item',item)
  const renderUi=()=>{
    return <div className='contDiv'>
  {board && item && board.map((el:any)=>{
-             return  <ToggleDiv onClick={()=>movebk(el[0],el[1],'c')} key={el[0]+""+el[1]+1} id={el[0]+""+el[1]+2} bg={el[0]+el[1]} style={{width:"12%", height:"4.6rem"}}>
+             return  <ToggleDiv onClick={()=>movebk(el[0],el[1],'c')} key={el[0]+""+el[1]+1} id={el[0]+""+el[1]+2} bg={el[0]+el[1]} className='toggleDiv1' style={{}}>
              <div id={el[0]+""+el[1]} > 
            {el[0]==item.k1.b1[0] && el[1]==item.k1.b1[1]? <div onClick={(e)=>movebk1(e,el[0],el[1],'b1')} className="chessKey">{bk1}</div>:
            el[0]==item.k1.b2[0] && el[1]==item.k1.b2[1]?<div onClick={(e)=>movebk2(e,el[0],el[1],'b2')} className="chessKey">{bk2}</div>:
@@ -443,12 +444,12 @@ console.log('item',item)
 
     return <div>
      <div className='container'>
-     <FontAwesomeIcon icon={regularChessKing} style={{color:'white',position:'relative',top:'0.5rem', fontSize:'2rem'}} />
-     <h1 className="head" style={{ color: 'White',margin:'0.5rem 1rem 1rem 1rem', fontSize:'2rem',paddingTop:'0rem'}}> Chess</h1>
-     <FontAwesomeIcon icon={solidChessKing} style={{color:'white',position:'relative',top:'0.5rem', fontSize:'2rem'}} />
+     <FontAwesomeIcon icon={regularChessKing} className='k1'  />
+     <h1 className="head"> Chess</h1>
+     <FontAwesomeIcon icon={solidChessKing} className='k2' />
      </div>
-     <span style={{color:'white',fontSize:'10px',marginLeft:'3rem'}}><b style={{color:'yellow'}}>suggestion:</b> start with white</span>
-      <div style={{display:"flex", flexWrap:"wrap"}}>
+     <span className='span'><b style={{color:'yellow'}}>suggestion:</b> start with white</span>
+      <div className='mainDiv' >
       <div>
          {renderUi()}
          </div>
