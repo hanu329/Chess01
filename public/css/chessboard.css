@@ -56,7 +56,11 @@
     height:4rem;
 }
 
-@media screen and (max-width:40rem) {
+@media screen and (max-width:30rem) {
+  .contDiv{
+    margin-left:0px;
+
+  }
   .toggleDiv1{
     width:12%;height:4.6vh;
   }
@@ -66,23 +70,27 @@
   }
   .mainDiv>div{
     /* border: 4px solid yellow; */
-    width:90%;
+    width:100%;
   }
   .contDiv{
-    width:90%;
+    width:100%;
   }
   .chessKey{
      /* border:1px solid red;  */
       padding:3vw;
       font-size: 3.5vw;
-      height:4vw;
+      height:4vh;
   }
   
 }
 
 @media screen and (min-width:30rem) and (max-width:40rem){
+  .contDiv{
+    margin-left:0px;
+
+  }
   .toggleDiv1{
-    width:12%;height:5.2vh;
+    width:12%;height:5vh;
   }
   .mainDiv{
     display:block;
@@ -90,35 +98,28 @@
   }
   .mainDiv>div{
     /* border: 4px solid yellow; */
-    width:90%;
+    width:100%;
   }
   .contDiv{
-    width:90%;
+    width:100%;
   }
   .chessKey{
      /* border:1px solid red;  */
       padding:1vw 2.5vw;
       font-size: 3vw;
-      height:4vw;
+      height:2vh;
   }
   
 }
 
-@media screen and (min-width:40rem )and (max-width:65rem) {
+@media screen and (min-width:40rem) and (max-width:65rem) {
   
   .chessKey{
-      border:1px solid red;  
       padding:2vw 1.5vw;
     
   } 
-  
-} 
-
-/* @media screen and (max-width:60rem) {
   .chessKey{
-    /* border:1px solid red;  */
-     /* padding:3vw;
-     font-size: 3.5vw;
-     height:4vw;
+  
+     height:6vh;
  }
-} */ 
+} 
