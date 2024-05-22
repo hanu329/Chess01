@@ -378,7 +378,7 @@ console.log('item',item)
      <h1 className="head"> Chess</h1>
      <FontAwesomeIcon icon={solidChessKing} className='k2' />
      </div>
-     <span className='span'><b style={{color:'yellow'}}>suggestion:</b> start with white</span>
+     <span className='span'><b style={{color:'red'}}>suggestion:</b> start with white</span>
       <div className='mainDiv' >
       <div>
          {renderUi()}
