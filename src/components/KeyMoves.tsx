@@ -17,33 +17,6 @@ function isVacant1(a:any, b:any,v:any) {
     return false;
 }
 
-function isVacant2(a:any, b:any,v:any) {
-   // console.log('a',a,b,v)
-    let obj1:any=JSON.parse(localStorage.chessObj);
-    for (const propKey in obj1) {
-        const prop = obj1[propKey];
-        for (const key in prop) {
-            if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w'))){
-                if (Array.isArray(prop[v]) && prop[v][0] == -1 && prop[v][1] == -1) {
-                    
-                    return 2;
-                }
-                if (Array.isArray(prop[key]) && prop[key][0] === a && prop[key][1] === b) {
-                    
-                    return 1;
-                }
-            }
-            if((key.includes('b') && v.includes('w')) ||(key.includes('w') && v.includes('b'))){
-                if (Array.isArray(prop[key]) && prop[key][0] === a && prop[key][1] === b) {
-                    return 2;
-                }
-            }
-            
-        }
-    }
-    return 3;
-}
-
 function isVacantA(obj1:any,a:any, b:any,v:any) {
     //let obj1:any=JSON.parse(localStorage.chessObj);
     for (const propKey in obj1) {
@@ -77,8 +50,8 @@ console.log(obj1)
       
         if(i>=0&&i<8){
            // console.log(i,b,isVacant(i,b))
-       if(isVacant2(i,b,c)==3) validSteps.push([i,b]) 
-        else if(isVacant2(i,b,c)==2){
+       if(isVacantA(obj1,i,b,c)==3) validSteps.push([i,b]) 
+        else if(isVacantA(obj1,i,b,c)==2){
     validSteps.push([i,b]);  
     break;     
         } 
@@ -89,8 +62,8 @@ console.log(obj1)
    
     for(let i=a-1; i>=0; i--){
         if(i>=0&&i<8){
-            if(isVacant2(i,b,c)==3) validSteps.push([i,b]) 
-                else if(isVacant2(i,b,c)==2){
+            if(isVacantA(obj1,i,b,c)==3) validSteps.push([i,b]) 
+                else if(isVacantA(obj1,i,b,c)==2){
                     validSteps.push([i,b]);  
                     break;     
                         }
@@ -100,8 +73,8 @@ console.log(obj1)
 
             for(let i=b+1; i<8; i++){
                 if(i>=0&&i<8){
-                    if(isVacant2(a,i,c)==3) validSteps.push([a,i]) 
-                        else if(isVacant2(a,i,c)==2){
+                    if(isVacantA(obj1,a,i,c)==3) validSteps.push([a,i]) 
+                        else if(isVacantA(obj1,a,i,c)==2){
                                     validSteps.push([i,b]);  
                                     break;     
                                         }
@@ -111,8 +84,8 @@ console.log(obj1)
                    
                     for(let i=b-1; i>=0; i--){
                         if(i>=0&&i<8){
-                            if(isVacant2(a,i,c)==3) validSteps.push([a,i]) 
-                                else if(isVacant2(a,i,c)==2){                                   
+                            if(isVacantA(obj1,a,i,c)==3) validSteps.push([a,i]) 
+                                else if(isVacantA(obj1,a,i,c)==2){                                   
                                             validSteps.push([i,b]);  
                                             break;     
                                                 }
@@ -141,7 +114,7 @@ export const KnightMoves1=(obj1:any,a:any, b:any,v:any)=>{
 }
 
 export const bishopMoves1=(obj1:any,a:any, b:any,v:any)=>{
-    console.log(obj1)
+   // console.log(obj1)
     let validSteps=[]
     let c=a;
     let d=b;
@@ -149,8 +122,8 @@ export const bishopMoves1=(obj1:any,a:any, b:any,v:any)=>{
       
       c++;
       d++;
-      if(isVacant2(c,d,v)==3) validSteps.push([c,d]) 
-        else if(isVacant2(c,d,v)==2){
+      if(isVacantA(obj1,c,d,v)==3) validSteps.push([c,d]) 
+        else if(isVacantA(obj1,c,d,v)==2){
         validSteps.push([c,d])
         break;
         }
@@ -162,8 +135,8 @@ export const bishopMoves1=(obj1:any,a:any, b:any,v:any)=>{
     
     e++;
     f--;
-    if(isVacant2(e,f,v)==3) validSteps.push([e,f]) 
-        else if(isVacant2(e,f,v)==2){
+    if(isVacantA(obj1,e,f,v)==3) validSteps.push([e,f]) 
+        else if(isVacantA(obj1,e,f,v)==2){
             validSteps.push([e,f])
             break;
             }
@@ -174,8 +147,8 @@ export const bishopMoves1=(obj1:any,a:any, b:any,v:any)=>{
    while(g>0 && h>0){
     g--;
     h--;
-    if(isVacant2(g,h,v)==3) validSteps.push([g,h]) 
-        else if(isVacant2(g,h,v)==2){
+    if(isVacantA(obj1,g,h,v)==3) validSteps.push([g,h]) 
+        else if(isVacantA(obj1,g,h,v)==2){
             validSteps.push([g,h])
             break;
             }
@@ -187,8 +160,8 @@ export const bishopMoves1=(obj1:any,a:any, b:any,v:any)=>{
    while(k>0 && l<7){
     k--;
     l++;
-    if(isVacant2(k,l,v)==3) validSteps.push([k,l])
-        else if(isVacant2(k,l,v)==2){
+    if(isVacantA(obj1,k,l,v)==3) validSteps.push([k,l])
+        else if(isVacantA(obj1,k,l,v)==2){
             validSteps.push([k,l])
             break;
             }
@@ -205,8 +178,8 @@ export const blackQueenMoves=(obj1:any,a:any, b:any,v:any)=>{
 let validSteps=[]
 for(let i=a+1; i<8; i++){
     if(i>=0&&i<8){
-        if(isVacant2(i,b,v)==3) validSteps.push([i,b]) 
-            else if(isVacant2(i,b,v)==2){
+        if(isVacantA(obj1,i,b,v)==3) validSteps.push([i,b]) 
+            else if(isVacantA(obj1,i,b,v)==2){
                 validSteps.push([i,b]); break;
         } 
             else break;
@@ -217,8 +190,8 @@ for(let i=a+1; i<8; i++){
 for(let i=a-1; i>=0; i--){
     
     if(i>=0&&i<8){
-        if(isVacant2(i,b,v)==3) validSteps.push([i,b]) 
-            else if(isVacant2(i,b,v)==2){
+        if(isVacantA(obj1,i,b,v)==3) validSteps.push([i,b]) 
+            else if(isVacantA(obj1,i,b,v)==2){
                 validSteps.push([i,b]); 
                 break;
         } 
@@ -230,9 +203,9 @@ for(let i=a-1; i>=0; i--){
          
             if(i>=0&&i<8){
               
-                if(isVacant2(a,i,v)==3) validSteps.push([a,i]) 
+                if(isVacantA(obj1,a,i,v)==3) validSteps.push([a,i]) 
                  
-                    else if(isVacant2(a,i,v)==2){
+                    else if(isVacantA(obj1,a,i,v)==2){
                         validSteps.push([a,i]); break;
                 } 
                     else break;
@@ -241,8 +214,8 @@ for(let i=a-1; i>=0; i--){
                
                 for(let i=b-1; i>=0; i--){
                     if(i>=0&&i<8){
-                        if(isVacant2(a,i,v)==3) validSteps.push([a,i]) 
-                            else if(isVacant2(a,i,v)==2){
+                        if(isVacantA(obj1,a,i,v)==3) validSteps.push([a,i]) 
+                            else if(isVacantA(obj1,a,i,v)==2){
                                 validSteps.push([a,i]); break;
                         }  
                             else break;
@@ -254,8 +227,8 @@ for(let i=a-1; i>=0; i--){
                           
                           c++;
                           d++;
-                          if(isVacant2(c,d,v)==3) validSteps.push([c,d]) 
-                            else if(isVacant2(c,d,v)==2){
+                          if(isVacantA(obj1,c,d,v)==3) validSteps.push([c,d]) 
+                            else if(isVacantA(obj1,c,d,v)==2){
                                 validSteps.push([c,d]); break;
                         } 
                             else break;
@@ -266,8 +239,8 @@ for(let i=a-1; i>=0; i--){
                         
                         e++;
                         f--;
-                        if(isVacant2(e,f,v)==3) validSteps.push([e,f]) 
-                            else if(isVacant2(e,f,v)==2){
+                        if(isVacantA(obj1,e,f,v)==3) validSteps.push([e,f]) 
+                            else if(isVacantA(obj1,e,f,v)==2){
                                 validSteps.push([e,f]); break;
                         } 
                             else break;
@@ -289,8 +262,8 @@ for(let i=a-1; i>=0; i--){
                        while(k>0 && l<7){
                         k--;
                         l++;
-                        if(isVacant2(k,l,v)==3) validSteps.push([k,l]) 
-                            else if(isVacant2(k,l,v)==2){
+                        if(isVacantA(obj1,k,l,v)==3) validSteps.push([k,l]) 
+                            else if(isVacantA(obj1,k,l,v)==2){
                                 validSteps.push([k,l]); break;
                         } 
                             else break;
@@ -320,9 +293,9 @@ export const blackKingMoves=(obj1:any,a:any, b:any,c:any)=>{
 export const blackPawnMoves=(obj1:any,a:any, b:any,c:any)=>{
     console.log(obj1)
 let validSteps=[]
-   if(isVacant2(a+1,b,c)==3 && a+1<8) validSteps.push([a+1,b])
-      if(isVacant2(a+1,b-1,c)==2 && a+1<8 && b-1>=0) validSteps.push([a+1,b-1])
-        if(isVacant2(a+1,b+1,c)==2 && a+1<8 && b+1<8) validSteps.push([a+1,b+1])
+   if(isVacantA(obj1,a+1,b,c)==3 && a+1<8) validSteps.push([a+1,b])
+      if(isVacantA(obj1,a+1,b-1,c)==2 && a+1<8 && b-1>=0) validSteps.push([a+1,b-1])
+        if(isVacantA(obj1,a+1,b+1,c)==2 && a+1<8 && b+1<8) validSteps.push([a+1,b+1])
  // console.log('blackpawn',validSteps)
     return validSteps;
 }
@@ -330,9 +303,9 @@ let validSteps=[]
 export const whitePawnMoves=(obj1:any,a:any, b:any,c:any)=>{
     let validSteps=[]
     console.log(obj1)
-    if(isVacant2(a-1,b,c)==3 && a-1>=0) validSteps.push([a-1,b])
-        if(isVacant2(a-1,b-1,c)==2 && a-1<8 && b-1>=0) validSteps.push([a-1,b-1])
-            if(isVacant2(a-1,b+1,c)==2 && a+1<8 && b+1<8) validSteps.push([a-1,b+1])
+    if(isVacantA(obj1,a-1,b,c)==3 && a-1>=0) validSteps.push([a-1,b])
+        if(isVacantA(obj1,a-1,b-1,c)==2 && a-1<8 && b-1>=0) validSteps.push([a-1,b-1])
+            if(isVacantA(obj1,a-1,b+1,c)==2 && a+1<8 && b+1<8) validSteps.push([a-1,b+1])
                
         return validSteps;
 }
