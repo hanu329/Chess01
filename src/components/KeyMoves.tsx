@@ -561,7 +561,7 @@ export const isKingSafe=(obj1:any)=>{
 
 
  export const isKingSafe1=(obj1:any,turn:any)=>{
-     // debugger;
+     // 
     let bK=obj1.k1.b4;  //b4={queenO}
     let wK=obj1.k2.w4;
     let grossArr= GrossValidArr(obj1);
@@ -698,7 +698,6 @@ let flag=1
               
 if(el.length>0){
     let v=getV(el[0],el[1],obj1,turn)
-    console.log('coo',v)
     let newObj;
     if(v) newObj=updateMoveObj(el[0], el[1],v, key,obj1)
         else newObj={...obj1, k1:{...obj1.k1, [key]:[el[0],el[1]]}}
@@ -707,7 +706,6 @@ if(el.length>0){
   let ch=isKingSafe1(newObj,turn);
   
   if(ch){
-    debugger
     flag=2
     
   }
@@ -732,7 +730,7 @@ if(el.length>0){
         else newObj={...obj1, k1:{...obj1.k1, [key]:[el[0],el[1]]}}
   let ch=isKingSafe1(newObj,turn);
   if(ch){
-    debugger;
+    
     flag=2
   }
 
@@ -764,7 +762,7 @@ if(el.length>0){
   let ch=isKingSafe1(newObj,turn);
   
   if(ch){
-    debugger;
+    
     flag=2
     
   }
@@ -789,7 +787,7 @@ if(el.length>0){
         else newObj={...obj1, k2:{...obj1.k2, [key]:[el[0],el[1]]}}
   let ch=isKingSafe1(newObj,turn);
   if(ch){
-    debugger;
+    
     flag=2
   }
 

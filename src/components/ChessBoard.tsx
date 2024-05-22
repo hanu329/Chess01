@@ -141,35 +141,22 @@ const containsArray = validStp.some((el:any)=> {
     else if(key.includes('wp')) newObj={...newObj, p2:{...newObj.p2, [key]:[a,b]}}
     else if(key.length==2 && key.includes('b')) newObj={...newObj, k1:{...newObj.k1, [key]:[a,b]}}
     else  newObj={...newObj, k2:{...newObj.k2, [key]:[a,b]}}
-   //c==2 blackchecked
-    let ch=isKingSafe1(newObj,turn)
-  console.log('chhhs',ch,key,turn)
- 
-   if(!ch && key.includes('w')){
-      setItem(newObj)
-      {turn==0?setTurn(1):setTurn(0)}
-    } 
-     else if(!ch && key.includes('b')){
-      setItem(newObj)
-      {turn==0?setTurn(1):setTurn(0)}
-    }  
-     else {
-              setItem(newObj)
-              {turn==0?setTurn(1):setTurn(0)}
-            };
-          
-    // if(!ch[0] && ch[1]==2 && key.includes('w')){
-    //   setItem(newObj)
-    //   {turn==0?setTurn(1):setTurn(0)}
-    // } 
-    //  else if(!ch[0] && ch[1]==3 && key.includes('b')){
-    //   setItem(newObj)
-    //   {turn==0?setTurn(1):setTurn(0)}
-    // } 
-    //        else if(ch[0]){
-    //         setItem(newObj)
-    //         {turn==0?setTurn(1):setTurn(0)}
-    //       };
+  
+   let ch=isKingSafe(newObj)
+      console.log('chhhs',ch,key,turn)
+
+        if(!ch[0] && ch[1]==2 && key.includes('w')){
+          setItem(newObj)
+          {turn==0?setTurn(1):setTurn(0)}
+        } 
+         else if(!ch[0] && ch[1]==3 && key.includes('b')){
+          setItem(newObj)
+          {turn==0?setTurn(1):setTurn(0)}
+        } 
+               else if(ch[0]){
+                setItem(newObj)
+                {turn==0?setTurn(1):setTurn(0)}
+              };
   }
  setKey('na')
  
