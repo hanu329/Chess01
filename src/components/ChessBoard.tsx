@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { RookMoves1,KnightMoves1,bishopMoves1, blackKingMoves,blackQueenMoves,blackPawnMoves,
-  whitePawnMoves,updateMoveObj,isKingSafe,isKingSafe1,isKingDead} from './KeyMoves';
+  whitePawnMoves,updateMoveObj,isKingSafe,isKingDead} from './KeyMoves';
 import { faChessQueen as regularChessQueen } from '@fortawesome/free-regular-svg-icons';
 import { faChessPawn as regularChessPawn} from '@fortawesome/free-regular-svg-icons';
 import { faChessRook as regularChessRook } from '@fortawesome/free-regular-svg-icons';
@@ -145,18 +145,10 @@ const containsArray = validStp.some((el:any)=> {
    let ch=isKingSafe(newObj)
       console.log('chhhs',ch,key,turn)
 
-        if(!ch[0] && ch[1]==2 && key.includes('w')){
-          setItem(newObj)
-          {turn==0?setTurn(1):setTurn(0)}
-        } 
-         else if(!ch[0] && ch[1]==3 && key.includes('b')){
-          setItem(newObj)
-          {turn==0?setTurn(1):setTurn(0)}
-        } 
-               else if(ch[0]){
-                setItem(newObj)
-                {turn==0?setTurn(1):setTurn(0)}
-              };
+      if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
+        setItem(newObj)
+        {turn==0?setTurn(1):setTurn(0)}
+      } 
   }
  setKey('na')
  
@@ -180,19 +172,10 @@ const movebk1=(e:any,a:any, b:any,v:any)=>{
     setValidStp(null)
     let ch=isKingSafe(res)
       console.log('chhhs',ch,key,turn)
-
-        if(!ch[0] && ch[1]==2 && key.includes('w')){
-          setItem(res)
-          {turn==0?setTurn(1):setTurn(0)}
-        } 
-         else if(!ch[0] && ch[1]==3 && key.includes('b')){
-          setItem(res)
-          {turn==0?setTurn(1):setTurn(0)}
-        } 
-               else if(ch[0]){
-                setItem(res)
-                {turn==0?setTurn(1):setTurn(0)}
-              };
+      if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
+        setItem(res)
+        {turn==0?setTurn(1):setTurn(0)}
+      } 
     setKey('na')
   }
 }
@@ -215,18 +198,10 @@ const movebk2=(e:any, a:any, b:any,v:any)=>{
     let ch=isKingSafe(res)
       console.log('chhhs',ch,key,turn)
 
-        if(!ch[0] && ch[1]==2 && key.includes('w')){
-          setItem(res)
-          {turn==0?setTurn(1):setTurn(0)}
-        } 
-         else if(!ch[0] && ch[1]==3 && key.includes('b')){
-          setItem(res)
-          {turn==0?setTurn(1):setTurn(0)}
-        } 
-               else if(ch[0]){
-                setItem(res)
-                {turn==0?setTurn(1):setTurn(0)}
-              };
+      if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
+        setItem(res)
+        {turn==0?setTurn(1):setTurn(0)}
+      } 
     setKey('na')
   }
 }
@@ -247,18 +222,11 @@ const movebk3=(e:any, a:any, b:any,v:any)=>{
     let ch=isKingSafe(res)
       console.log('chhhs',ch,key,turn)
 
-        if(!ch[0] && ch[1]==2 && key.includes('w')){
+        if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
           setItem(res)
           {turn==0?setTurn(1):setTurn(0)}
         } 
-         else if(!ch[0] && ch[1]==3 && key.includes('b')){
-          setItem(res)
-          {turn==0?setTurn(1):setTurn(0)}
-        } 
-               else if(ch[0]){
-                setItem(res)
-                {turn==0?setTurn(1):setTurn(0)}
-              };
+        
     setKey('na')
   }
 }
@@ -282,18 +250,10 @@ const movebQueen=(e:any, a:any, b:any,v:any)=>{
     let ch=isKingSafe(res)
     //console.log('chhhs',ch,key,turn)
 
-      if(!ch[0] && ch[1]==2 && key.includes('w')){
-        setItem(res)
-        {turn==0?setTurn(1):setTurn(0)}
-      } 
-       else if(!ch[0] && ch[1]==3 && key.includes('b')){
-        setItem(res)
-        {turn==0?setTurn(1):setTurn(0)}
-      } 
-             else if(ch[0]){
-              setItem(res)
-              {turn==0?setTurn(1):setTurn(0)}
-            };
+    if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
+      setItem(res)
+      {turn==0?setTurn(1):setTurn(0)}
+    } 
     setKey('na')
   }
 }
@@ -313,18 +273,10 @@ const movebKing=(e:any, a:any, b:any,v:any)=>{
     setValidStp(null)
     let ch=isKingSafe(res)
 
-      if(!ch[0] && ch[1]==2 && key.includes('w')){
-        setItem(res)
-        {turn==0?setTurn(1):setTurn(0)}
-      } 
-       else if(!ch[0] && ch[1]==3 && key.includes('b')){
-        setItem(res)
-        {turn==0?setTurn(1):setTurn(0)}
-      } 
-             else if(ch[0]){
-              setItem(res)
-              {turn==0?setTurn(1):setTurn(0)}
-            };
+    if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
+      setItem(res)
+      {turn==0?setTurn(1):setTurn(0)}
+    } 
     setKey('na')
   }
 }
@@ -361,19 +313,10 @@ const combat=(a:any, b:any,v:any, key:any)=>{
   //if kingsafe then update else refuse
   let ch=isKingSafe(res)
      // console.log('chhhs',ch,key,turn)
-        
-        if(!ch[0] && ch[1]==2 && key.includes('w')){
-          setItem(res)
-          {turn==0?setTurn(1):setTurn(0)}
-        } 
-         else if(!ch[0] && ch[1]==3 && key.includes('b')){
-          setItem(res)
-          {turn==0?setTurn(1):setTurn(0)}
-        } 
-               else if(ch[0]){
-                setItem(res)
-                {turn==0?setTurn(1):setTurn(0)}
-              };
+     if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
+      setItem(res)
+      {turn==0?setTurn(1):setTurn(0)}
+    } 
    //setFlag(2)
    setValidStp(null) 
   setKey('na')
