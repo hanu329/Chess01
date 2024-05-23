@@ -34,13 +34,9 @@
 }
 
 .mainDiv{
- 
   display:flex;
   flex-wrap:wrap;
-  height:67vh;
-}
-.mainDiv>div{
-  height:67vh;
+  height:80vh;
 }
 
 .contDiv{ 
@@ -71,7 +67,14 @@
   border-radius: 1vw;
   outline: none;
 }
-
+button{
+ 
+  margin:2vw;
+}
+button:active{
+  margin:2vw;
+  background-color: grey;
+}
 @media screen and (max-width:30rem) {
   .ccontainer{
     margin-left:2vw;
@@ -87,9 +90,8 @@
     height:7vh;
   }
   .mainDiv{
-   
     display:block;
-    height:50vh;
+    height:60vh;
  
   }
   .contDiv{
@@ -103,17 +105,16 @@
       font-size: 4vw;
       height:4vh;
   }
-  
+  button{
+ 
+    margin:4vh 2vw;
+  }
+  button:active{
+    margin:2vw;
+    background-color: grey;
+  }
 }
-button{
-  position:relative;
-  top:5vw;
-  margin:2vw;
-}
-button:active{
-  margin:2vw;
-  background-color: grey;
-}
+
 
 @media screen and (min-width:30rem) and (max-width:40rem){
 
@@ -130,7 +131,7 @@ button:active{
   .mainDiv{
     margin-top:5vw;
     display:block;
-   height:50vh;
+   height:70vh;
   }
   .contDiv{
     margin-top:3vw;
@@ -143,10 +144,17 @@ button:active{
       font-size: 3vw;
       height:4vh;
   }
-  
+  button{
+ 
+    margin:2vh 2vw;
+  }
+  button:active{
+    margin:2vw;
+    background-color: grey;
+  }
 }
 
-@media screen and (min-width:40rem) and (max-width:65rem) {
+/* @media screen and (min-width:40rem) and (max-width:65rem) {
   
   .chessKey{
       padding:2vw 1.5vw;
@@ -156,4 +164,4 @@ button:active{
   
      height:6vh;
  }
-} 
+}  */
