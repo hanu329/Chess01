@@ -75,6 +75,20 @@ button:active{
   margin:2vw;
   background-color: grey;
 }
+.winner{
+  /* border:2px solid grey; */
+  border-radius: 3vw;
+  width:11vw;
+  height: 8vh;
+  background-color: purple;
+  color:white;
+  padding:4vw;
+  font-size:1.7vw;
+  position: relative;
+  left:60%;
+  bottom:70vh;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
 @media screen and (max-width:30rem) {
   .ccontainer{
     margin-left:2vw;
@@ -113,6 +127,21 @@ button:active{
     margin:2vw;
     background-color: grey;
   }
+  .winner{
+    /* border:2px solid grey; */
+    border-radius: 3vw;
+    width:11vw;
+    height: 8vh;
+    background-color: red;
+    color:white;
+    padding-top:6vh;
+    font-size:1.7vw;
+    position: relative;
+    left:40%;
+    bottom:60vh;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    transition: 2s;
+  }
 }
 
 
@@ -126,7 +155,8 @@ button:active{
     margin-bottom:5vw;
   }
   .toggleDiv1{
-    width:12%;height:8vh;
+    width:12%;
+    height:8vh;
   }
   .mainDiv{
     margin-top:5vw;
@@ -139,29 +169,30 @@ button:active{
     margin-left: 0px;
   }
   .chessKey{
-   
       padding-left:4vw;
       font-size: 3vw;
       height:4vh;
   }
   button{
- 
     margin:2vh 2vw;
   }
   button:active{
     margin:2vw;
     background-color: grey;
   }
+  .winner{
+    /* border:2px solid grey; */
+    border-radius: 3vw;
+    width:11vw;
+    height: 8vh;
+    background-color: purple;
+    color:white;
+    padding-top:6vh;
+    font-size:1.7vw;
+    position: relative;
+    left:60%;
+    bottom:70vh;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
 }
 
-/* @media screen and (min-width:40rem) and (max-width:65rem) {
-  
-  .chessKey{
-      padding:2vw 1.5vw;
-    
-  } 
-  .chessKey{
-  
-     height:6vh;
- }
-}  */

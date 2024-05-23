@@ -132,7 +132,7 @@ const ChessBoard = () => {
   const [validStp, setValidStp]:any = useState(null); 
   const [key, setKey] = useState("na"); 
  const [turn, setTurn] =useState(-1)
- 
+ const [winner,setWinner]=useState('na')
 
  useEffect(()=>{
   localStorage.setItem("chessObj", JSON.stringify(item)); 
@@ -143,8 +143,15 @@ const ChessBoard = () => {
   if(!ch[0]){
     let f=isKingDead(item,turn)
     if(f){
-      if(turn==1) alert('white is winner')
-        else alert('black is winner')
+     if(turn==1){
+  console.log('whitett')
+// alert('white is winner')
+ setWinner('white')
+} 
+  else{
+   // alert('black is winner')
+    setWinner('black')
+}
     }
   }
  
@@ -441,17 +448,20 @@ console.log('item',item)
   setItem(obj)
   setTurn(-1)
   setFlag(3)
+  setWinner('na')
   console.log('reee',obj,item)
  }
 const startblack=()=>{
    setTurn(1)
    setFlag(3)
    setItem(obj)
+   setWinner('na')
 }
 const startWhite=()=>{
   setTurn(0)
   setFlag(3)
   setItem(obj)
+  setWinner('na')
 }
     return <div>
      <div className='container'>
@@ -460,6 +470,7 @@ const startWhite=()=>{
      <FontAwesomeIcon icon={solidChessKing} className='k2' />
      </div>
      <span className='span'><b style={{color:'yellow'}}>suggestion:</b> start with white</span>
+    
       <div className='mainDiv' >
       <div>
          {renderUi()}
@@ -471,6 +482,9 @@ const startWhite=()=>{
    <button onClick={startWhite} className='restartBtn'>start with white</button>
    <button onClick={startblack} className='restartBtn'>start with black</button>
    </div>
+   <div>
+      {winner=='white'?<div className='winner'>white is winner</div>:winner=='black'?<div className='winner'>black is winner</div>:""}
+     </div>
     </div>
 };
 //here adding data 
