@@ -90,8 +90,15 @@ button:active{
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   transition: 4s;
 }
+*{
+  margin:0px;
+  padding:0px;
+  box-sizing: border-box;
+}
 @media screen and (max-width:30rem) {
-  .ccontainer{
+ 
+  .container{
+
     margin-left:2vw;
   }
  
@@ -101,10 +108,11 @@ button:active{
     margin-left:0rem
   }
   .toggleDiv1{
-    width:12%;
+    width:12.5%;
     height:7vh;
   }
   .mainDiv{
+    border:2px solid red;
     display:block;
     height:60vh;
  
@@ -156,7 +164,7 @@ button:active{
     margin-bottom:5vw;
   }
   .toggleDiv1{
-    width:12%;
+    width:12.5%;
     height:8vh;
   }
   .mainDiv{
