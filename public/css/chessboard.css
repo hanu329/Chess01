@@ -112,7 +112,7 @@ button:active{
     height:7vh;
   }
   .mainDiv{
-    border:2px solid red;
+    /* border:2px solid red; */
     display:block;
     height:60vh;
  
