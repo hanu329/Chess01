@@ -1,4 +1,7 @@
 
+body{
+  font-family:Arial, Helvetica, sans-serif
+}
 .container{
   display:flex;
   margin-left:10vw;
@@ -78,11 +81,11 @@ button:active{
 .winner{
   /* border:2px solid grey; */
   border-radius: 3vw;
-  width:11vw;
-  height: 8vh;
+  width:23vw;
+  height: 10vw;
   background-color: purple;
   color:white;
-  padding:4vw;
+  padding:3vw;
   font-size:1.7vw;
   position: relative;
   left:60%;
@@ -139,12 +142,12 @@ button:active{
   .winner{
     /* border:2px solid grey; */
     border-radius: 3vw;
-    width:11vw;
+    width:22vw;
     height: 8vh;
     background-color: red;
     color:white;
-    padding-top:6vh;
-    font-size:1.7vw;
+    padding-top:3vh;
+    font-size:2vw;
     position: relative;
     left:40%;
     bottom:60vh;
@@ -192,11 +195,11 @@ button:active{
   .winner{
     /* border:2px solid grey; */
     border-radius: 3vw;
-    width:11vw;
+    width:24vw;
     height: 8vh;
     background-color: purple;
     color:white;
-    padding-top:6vh;
+    padding-top:3vh;
     font-size:1.7vw;
     position: relative;
     left:60%;
