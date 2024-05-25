@@ -1,6 +1,9 @@
 
-body{
-  font-family:Arial, Helvetica, sans-serif
+*{
+  font-family:Arial, Helvetica, sans-serif;
+  margin:0px;
+  padding:0px;
+  box-sizing: border-box;
 }
 .container{
   display:flex;
@@ -71,12 +74,26 @@ body{
   outline: none;
 }
 button{
- 
-  margin:2vw;
+  margin:3vw;
 }
 button:active{
-  margin:2vw;
   background-color: grey;
+}
+.s1{
+  position:relative;
+  left:44.5vw;
+  color:white;
+  /* border:1px solid red; */
+  box-shadow: 1rem;
+  padding:.5vw
+}
+.s2{
+  position:relative;
+  left:44.5vw;
+  color:white;
+  /* border:1px solid red; */
+  box-shadow: 1rem;
+  padding:.5vw
 }
 .winner{
   /* border:2px solid grey; */

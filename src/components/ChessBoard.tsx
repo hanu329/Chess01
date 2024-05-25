@@ -1,6 +1,6 @@
 
 import '../../public/css/chessboard.css'; // You can style the chess board in ChessBoard.css
-import {useState, useEffect} from 'react'
+import {useState, useEffect,useRef} from 'react'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { RookMoves1,KnightMoves1,bishopMoves1, blackKingMoves,blackQueenMoves,blackPawnMoves,
@@ -95,61 +95,75 @@ const obj={
   k2:whiteKey,
   p2:whitePawn
 }
-let a:any={...obj.k1};let c:any={...obj.p1};
-let b:any={...obj.k2};let d:any={...obj.p2};
 
 
-for(const i in a){
-  console.log(111)
-  
-   a[i]=[-1,-1]
-   console.log('aa',i,a[i])
-}
-
-for(const i in b){
-
-   b[i]=[-1,-1]
-}
-for(const i in c){
-
-   c[i]=[-1,-1]
-}
-for(const i in d){
-
-   d[i]=[-1,-1]
-}
-
-let nullObj={
-  k1:a, 
-  p1:c,
-  k2:b,
-  p2:d
-}
-console.log('nnn',nullObj)
 const ChessBoard = () => {
   const [item, setItem] = useState(obj); 
   const [flag, setFlag]=useState(2)
   const [validStp, setValidStp]:any = useState(null); 
   const [key, setKey] = useState("na"); 
- const [turn, setTurn] =useState(-1)
+ const [turn, setTurn] =useState(-1)     //0-white
  const [winner,setWinner]=useState('na')
+ const [t0,setT0]=useState(-1)
+ const [s0,setS0]=useState(0)
+ const [t1,setT1]=useState(-1)
+ const [s1,setS1]=useState(0)
 
+//10:00 ->09:55
+
+let tRef1:any=useRef(0)
+let tRef2:any=useRef(0)
+ const showTimer=(t:number)=>{
+  if(t==0){
+    clearInterval(tRef2.current)
+    tRef1.current= setInterval(()=>{
+      setS0((pre:any) => {
+        if (pre === 0) {
+          setT0((min:any) => min > 0 ? min - 1 : 0);
+          return 59;
+        } else {
+          return pre - 1;
+        }
+      });
+     
+    }, 1000);
+  }else if(t==1){
+    clearInterval(tRef1.current)
+    tRef2.current= setInterval(()=>{
+      setS1((pre:any) => {
+        if (pre === 0) {
+          setT1((min:any) => min > 0 ? min - 1 : 0);
+          return 59;
+        } else {
+          return pre - 1;
+        }
+      });
+     
+    }, 1000);
+  }
+ 
+ }
+
+ 
  useEffect(()=>{
   localStorage.setItem("chessObj", JSON.stringify(item)); 
-  console.log('item',item)
   
+  if(turn!= -1 && t0==0 && s0==0){
+    setWinner('black')
+  }
+  else if(turn != -1 && t1==0 && s1==0){
+    setWinner('white')
+  }
   let ch=isKingSafe(item)
-  console.log('ch',ch)
+ 
   if(!ch[0]){
     let f=isKingDead(item,turn)
     if(f){
      if(turn==1){
-  console.log('whitett')
-// alert('white is winner')
+ 
  setWinner('white')
 } 
   else{
-   // alert('black is winner')
     setWinner('black')
 }
     }
@@ -185,7 +199,7 @@ const containsArray = validStp.some((el:any)=> {
 
       if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
         setItem(newObj)
-        {turn==0?setTurn(1):setTurn(0)}
+        {turn==0?<>{setTurn(1)}{showTimer(1)}</>:<>{setTurn(0)}{showTimer(0)}</>}
       } 
   }
  setKey('na')
@@ -323,7 +337,6 @@ const movebPawn=(e:any,a:any, b:any,v:any)=>{
   //
   e.stopPropagation();
   let f=1;
-  //console.log('pawn',a,b,validStp,key,v)
   if(validStp){
     validStp.map((el:any)=>{
       if(el[0]==a && el[1]==b){
@@ -340,17 +353,13 @@ const movebPawn=(e:any,a:any, b:any,v:any)=>{
     if(v.includes("bp")) res=blackPawnMoves(item,a,b,v);
     else res= whitePawnMoves(item,a,b,v)
       setKey(v);    
-      // setFlag(2)
        setValidStp(res);
 }
-//console.log('validdd',validStp)
 const combat=(a:any, b:any,v:any, key:any)=>{
   
   let newObj= JSON.parse(JSON.stringify(item)); 
   var res=updateMoveObj(a, b,v, key,newObj)
-  //if kingsafe then update else refuse
   let ch=isKingSafe(res)
-     // console.log('chhhs',ch,key,turn)
      if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
       setItem(res)
       {turn==0?setTurn(1):setTurn(0)}
@@ -453,15 +462,33 @@ console.log('item',item)
  }
 const startblack=()=>{
    setTurn(1)
+    showTimer(1)
    setFlag(3)
    setItem(obj)
    setWinner('na')
 }
 const startWhite=()=>{
   setTurn(0)
+  showTimer(0)
   setFlag(3)
   setItem(obj)
   setWinner('na')
+}
+const timerFun=(e:any)=>{
+  let v=e.target.value;
+if(v=='na' || v=='wt'){
+  setT0(-1); setT1(-1);
+} 
+  else if(v=='10'){
+    setT0(10); setT1(10);
+
+  } 
+else if(v=='20'){
+  setT0(20); setT1(20);
+}
+  else if(v=='30'){
+    setT0(30); setT1(30);
+  } 
 }
     return <div>
      <div className='container'>
@@ -469,13 +496,30 @@ const startWhite=()=>{
      <h1 className="head"> Chess</h1>
      <FontAwesomeIcon icon={solidChessKing} className='k2' />
      </div>
-     <span className='span'><b style={{color:'yellow'}}>suggestion:</b> start with white</span>
-    
+     <select style={{borderRadius:'2vw',outline:'none'}} onChange={(e)=>timerFun(e)}>
+     <option value='wt'>no Timer</option>
+        <option value='10'>10 min</option>
+       <option value='20'> 20 min</option>
+       <option value='30'> 30 min</option>
+        
+     </select>
+     
       <div className='mainDiv' >
       <div>
+        {t1>=0?<span className='s1' style={{}}> 
+        {t1<10?'0'+t1:t1}:{s1<10?'0'+s1:s1}
+      </span>:''}
+      
+      
          {renderUi()}
+         {t0>=0? <span className='s2' style={{}}>
+        {t0<10?'0'+t0:t0}:{s0<10?'0'+s0:s0}
+      </span>:''}
+        
          </div>
-        <div style={{width:"30%"}}></div>
+        <div style={{width:"30%"}}>
+    
+        </div>
         
       </div>
    <div> <button onClick={restartFun} className='restartBtn'>restart</button>
