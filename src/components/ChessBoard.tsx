@@ -109,17 +109,33 @@ const ChessBoard = () => {
  const [t1,setT1]=useState(-1)
  const [s1,setS1]=useState(0)
 
-//10:00 ->09:55
 
 let tRef1:any=useRef(0)
 let tRef2:any=useRef(0)
+
+const initTimer=()=>{
+  setT0(-1)
+  setT1(-1)
+  setS0(0)
+  setS1(0)
+}
+
  const showTimer=(t:number)=>{
+ 
   if(t==0){
     clearInterval(tRef2.current)
     tRef1.current= setInterval(()=>{
       setS0((pre:any) => {
         if (pre === 0) {
-          setT0((min:any) => min > 0 ? min - 1 : 0);
+          setT0((min:any) => {
+            if(pre==0 && min==0){
+              setWinner('black')
+              initTimer();
+            }
+           min= min>0?min-1:min
+            
+            return min
+          });
           return 59;
         } else {
           return pre - 1;
@@ -132,7 +148,14 @@ let tRef2:any=useRef(0)
     tRef2.current= setInterval(()=>{
       setS1((pre:any) => {
         if (pre === 0) {
-          setT1((min:any) => min > 0 ? min - 1 : 0);
+          setT1((min:any) =>{
+            if(pre==0 && min==0){
+              setWinner('white')
+              initTimer();
+            }
+            min=min > 0 ? min - 1 : 0
+            return min
+          } );
           return 59;
         } else {
           return pre - 1;
@@ -144,16 +167,9 @@ let tRef2:any=useRef(0)
  
  }
 
- 
  useEffect(()=>{
   localStorage.setItem("chessObj", JSON.stringify(item)); 
-  
-  if(turn!= -1 && t0==0 && s0==0){
-    setWinner('black')
-  }
-  else if(turn != -1 && t1==0 && s1==0){
-    setWinner('white')
-  }
+ 
   let ch=isKingSafe(item)
  
   if(!ch[0]){
@@ -220,13 +236,12 @@ const movebk1=(e:any,a:any, b:any,v:any)=>{
   else{  
     let newObj= JSON.parse(JSON.stringify(item));
     let res=updateMoveObj(a, b,v, key,newObj)
-    //if kingsafe then update else refuse
     setValidStp(null)
     let ch=isKingSafe(res)
       console.log('chhhs',ch,key,turn)
       if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
         setItem(res)
-        {turn==0?setTurn(1):setTurn(0)}
+        {turn==0?<>{setTurn(1)}{showTimer(1)}</>:<>{setTurn(0)}{showTimer(0)}</>}
       } 
     setKey('na')
   }
@@ -246,13 +261,12 @@ const movebk2=(e:any, a:any, b:any,v:any)=>{
     let newObj= JSON.parse(JSON.stringify(item));
     let res=updateMoveObj(a, b,v, key,newObj)
     setValidStp(null)
-    //if kingsafe then update else refuse
     let ch=isKingSafe(res)
       console.log('chhhs',ch,key,turn)
 
       if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
         setItem(res)
-        {turn==0?setTurn(1):setTurn(0)}
+          {turn==0?<>{setTurn(1)}{showTimer(1)}</>:<>{setTurn(0)}{showTimer(0)}</>}
       } 
     setKey('na')
   }
@@ -270,13 +284,12 @@ const movebk3=(e:any, a:any, b:any,v:any)=>{
     let newObj= JSON.parse(JSON.stringify(item));
     let res=updateMoveObj(a, b,v, key,newObj)
     setValidStp(null)
-    //if kingsafe then update else refuse
     let ch=isKingSafe(res)
       console.log('chhhs',ch,key,turn)
 
         if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
           setItem(res)
-          {turn==0?setTurn(1):setTurn(0)}
+            {turn==0?<>{setTurn(1)}{showTimer(1)}</>:<>{setTurn(0)}{showTimer(0)}</>}
         } 
         
     setKey('na')
@@ -284,7 +297,6 @@ const movebk3=(e:any, a:any, b:any,v:any)=>{
 }
 
 const movebQueen=(e:any, a:any, b:any,v:any)=>{
- // console.log('init',v)
  e.stopPropagation();
   if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
     let res=blackQueenMoves(item,a,b,v);
@@ -298,13 +310,10 @@ const movebQueen=(e:any, a:any, b:any,v:any)=>{
     let res=updateMoveObj(a, b,v, key,newObj)
    
     setValidStp(null)
-    //if kingsafe then update else refuse
     let ch=isKingSafe(res)
-    //console.log('chhhs',ch,key,turn)
-
     if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
       setItem(res)
-      {turn==0?setTurn(1):setTurn(0)}
+        {turn==0?<>{setTurn(1)}{showTimer(1)}</>:<>{setTurn(0)}{showTimer(0)}</>}
     } 
     setKey('na')
   }
@@ -327,7 +336,7 @@ const movebKing=(e:any, a:any, b:any,v:any)=>{
 
     if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
       setItem(res)
-      {turn==0?setTurn(1):setTurn(0)}
+        {turn==0?<>{setTurn(1)}{showTimer(1)}</>:<>{setTurn(0)}{showTimer(0)}</>}
     } 
     setKey('na')
   }
@@ -362,7 +371,7 @@ const combat=(a:any, b:any,v:any, key:any)=>{
   let ch=isKingSafe(res)
      if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
       setItem(res)
-      {turn==0?setTurn(1):setTurn(0)}
+        {turn==0?<>{setTurn(1)}{showTimer(1)}</>:<>{setTurn(0)}{showTimer(0)}</>}
     } 
    //setFlag(2)
    setValidStp(null) 
@@ -529,6 +538,10 @@ else if(v=='20'){
    <div>
       {winner=='white'?<div className='winner'>white is winner</div>:winner=='black'?<div className='winner'>black is winner</div>:""}
      </div>
+     {/* <span>
+     {t0==0 || t1==0?{timeWinner()}:''}
+     </span> */}
+     
     </div>
 };
 //here adding data 
