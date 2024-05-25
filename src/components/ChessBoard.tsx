@@ -105,9 +105,9 @@ const ChessBoard = () => {
  const [turn, setTurn] =useState(-1)     //0-white
  const [winner,setWinner]=useState('na')
  const [t0,setT0]=useState(-1)
- const [s0,setS0]=useState(0)
+ const [s0,setS0]=useState(-1)
  const [t1,setT1]=useState(-1)
- const [s1,setS1]=useState(0)
+ const [s1,setS1]=useState(-1)
 
 
 let tRef1:any=useRef(0)
@@ -116,8 +116,8 @@ let tRef2:any=useRef(0)
 const initTimer=()=>{
   setT0(-1)
   setT1(-1)
-  setS0(0)
-  setS1(0)
+  setS0(-1)
+  setS1(-1)
 }
 
  const showTimer=(t:number)=>{
@@ -137,7 +137,12 @@ const initTimer=()=>{
             return min
           });
           return 59;
-        } else {
+        }else if(pre<0){
+          clearInterval(tRef2.current)
+          clearInterval(tRef1.current)
+          return -1
+        } 
+        else {
           return pre - 1;
         }
       });
@@ -157,7 +162,13 @@ const initTimer=()=>{
             return min
           } );
           return 59;
-        } else {
+        } else if(pre<0){
+          clearInterval(tRef2.current)
+          clearInterval(tRef1.current)
+          return -1
+        }
+        
+        else {
           return pre - 1;
         }
       });
@@ -471,18 +482,19 @@ console.log('item',item)
  }
 const startblack=()=>{
    setTurn(1)
-    showTimer(1)
+  {t1>0?showTimer(1):''}
    setFlag(3)
    setItem(obj)
    setWinner('na')
 }
 const startWhite=()=>{
   setTurn(0)
-  showTimer(0)
+  {t1>0?showTimer(0):''}
   setFlag(3)
   setItem(obj)
   setWinner('na')
 }
+console.log('tt111',t1)
 const timerFun=(e:any)=>{
   let v=e.target.value;
 if(v=='na' || v=='wt'){
@@ -490,13 +502,16 @@ if(v=='na' || v=='wt'){
 } 
   else if(v=='10'){
     setT0(10); setT1(10);
+    setS0(0); setS1(0);
 
   } 
 else if(v=='20'){
   setT0(20); setT1(20);
+  setS0(0); setS1(0);
 }
   else if(v=='30'){
     setT0(30); setT1(30);
+    setS0(0); setS1(0);
   } 
 }
     return <div>
