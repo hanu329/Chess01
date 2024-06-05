@@ -1,4 +1,5 @@
 //import { useState } from 'react'
+import { Rough } from './components/Rough'
 
 import ChessBoard from './components/ChessBoard'
 
@@ -6,7 +7,8 @@ function App() {
   //const [count, setCount] = useState(0)
 
   return (
-    <> <ChessBoard /></>
+    <> <ChessBoard />
+    </>
      
   )
 }

@@ -44,12 +44,12 @@ function isVacantA(obj1:any,a:any, b:any,v:any) {
 export const RookMoves1=(obj1:any,a:any,b:any,c:any)=>{
 
   let validSteps= [] 
-console.log(obj1)
+//  console.log(obj1)
 
     for(let i=a+1; i<8; i++){
       
         if(i>=0&&i<8){
-           // console.log(i,b,isVacant(i,b))
+           // //  console.log(i,b,isVacant(i,b))
        if(isVacantA(obj1,i,b,c)==3) validSteps.push([i,b]) 
         else if(isVacantA(obj1,i,b,c)==2){
     validSteps.push([i,b]);  
@@ -93,12 +93,12 @@ console.log(obj1)
                         }
                             }
                            
-                            console.log('rookkk',validSteps)
+                            //  console.log('rookkk',validSteps)
                            return validSteps;
 }
 
 export const KnightMoves1=(obj1:any,a:any, b:any,v:any)=>{
-    //console.log(a,b,v)
+    ////  console.log(a,b,v)
     let validSteps=[];
 
     if(isVacantA(obj1,a+1,b+2,v)!==1 && a+1<8 && b+2<8) validSteps.push([a+1,b+2])
@@ -114,7 +114,7 @@ export const KnightMoves1=(obj1:any,a:any, b:any,v:any)=>{
 }
 
 export const bishopMoves1=(obj1:any,a:any, b:any,v:any)=>{
-   // console.log(obj1)
+   // //  console.log(obj1)
     let validSteps=[]
     let c=a;
     let d=b;
@@ -168,12 +168,12 @@ export const bishopMoves1=(obj1:any,a:any, b:any,v:any)=>{
         else break;
 
    }
-   console.log('bishoop',validSteps)
+   //  console.log('bishoop',validSteps)
    return validSteps;
 }
 
 export const blackQueenMoves=(obj1:any,a:any, b:any,v:any)=>{
-    console.log('vv',obj1,v)
+    //  console.log('vv',obj1,v)
   
 let validSteps=[]
 for(let i=a+1; i<8; i++){
@@ -270,13 +270,13 @@ for(let i=a-1; i>=0; i--){
                     
                        }
                       
-                     //  console.log('validsteps',validSteps)
+                     //  //  console.log('validsteps',validSteps)
                          return validSteps;                     
 
 }
 
 export const blackKingMoves=(obj1:any,a:any, b:any,c:any)=>{
-    console.log(obj1)
+    //  console.log(obj1)
    let validSteps=[]; 
    if(!isVacant1(a-1,b,c) && a-1>=0) validSteps.push([a-1,b])
    if(!isVacant1(a+1,b,c) && a+1<8) validSteps.push([a+1,b])
@@ -291,18 +291,18 @@ export const blackKingMoves=(obj1:any,a:any, b:any,c:any)=>{
 }
 
 export const blackPawnMoves=(obj1:any,a:any, b:any,c:any)=>{
-    console.log(obj1)
+    //  console.log(obj1)
 let validSteps=[]
    if(isVacantA(obj1,a+1,b,c)==3 && a+1<8) validSteps.push([a+1,b])
       if(isVacantA(obj1,a+1,b-1,c)==2 && a+1<8 && b-1>=0) validSteps.push([a+1,b-1])
         if(isVacantA(obj1,a+1,b+1,c)==2 && a+1<8 && b+1<8) validSteps.push([a+1,b+1])
- // console.log('blackpawn',validSteps)
+ // //  console.log('blackpawn',validSteps)
     return validSteps;
 }
 
 export const whitePawnMoves=(obj1:any,a:any, b:any,c:any)=>{
     let validSteps=[]
-    console.log(obj1)
+    //  console.log(obj1)
     if(isVacantA(obj1,a-1,b,c)==3 && a-1>=0) validSteps.push([a-1,b])
         if(isVacantA(obj1,a-1,b-1,c)==2 && a-1<8 && b-1>=0) validSteps.push([a-1,b-1])
             if(isVacantA(obj1,a-1,b+1,c)==2 && a+1<8 && b+1<8) validSteps.push([a-1,b+1])
@@ -337,10 +337,10 @@ export const updateMoveObj=(a:any, b:any,v:any, key:any,  boardObj:any)=>{
                 [v]:[-1,-1]
             }
            }   
-           console.log(newobj)    
+           //  console.log(newobj)    
           }
        //   delete newobj['k2'][v]
-         console.log('updaatemove',newobj)
+         //  console.log('updaatemove',newobj)
         return newobj;
     }
     else if(key.includes('b') && !key.includes('bp')){
@@ -365,10 +365,10 @@ export const updateMoveObj=(a:any, b:any,v:any, key:any,  boardObj:any)=>{
                 [v]:[-1,-1]
             }
            }   
-           console.log(newobj)    
+           //  console.log(newobj)    
           }
          // delete newobj['k2'][v]
-         console.log('updaatemove',newobj)
+         //  console.log('updaatemove',newobj)
         return newobj;
     }
 
@@ -396,7 +396,7 @@ export const updateMoveObj=(a:any, b:any,v:any, key:any,  boardObj:any)=>{
           }
 
           
-          console.log(newobj)
+          //  console.log(newobj)
         return newobj;
     }   
     else if(key.includes('w') && !key.includes('wp')){
@@ -423,13 +423,13 @@ export const updateMoveObj=(a:any, b:any,v:any, key:any,  boardObj:any)=>{
           }
 
           
-          console.log(newobj)
+          //  console.log(newobj)
         return newobj;
     }   
 }
 
 export const GrossValidArr=(obj1:any)=>{
-   // console.log('ggg',obj1)
+   // //  console.log('ggg',obj1)
     let bKA=[]
     let bPA=[]
     let wKA=[]
@@ -514,7 +514,7 @@ let wp8=whitePawnMoves(obj1,wP8[0],wP8[1],'wp8')
    bPA.push(bp1,bp2,bp3,bp4,bp5,bp6,bp7,bp8)
    wKA.push(wk1,wk2,wk3,wk4,wk5,wk6,wk7,wk8)
    wPA.push(wp1,wp2,wp3,wp4,wp5,wp6,wp7,wp8)
- //  console.log('aaaa',[bKA,bPA,wKA,wPA])
+ //  //  console.log('aaaa',[bKA,bPA,wKA,wPA])
    return [bKA,bPA,wKA,wPA]
 }
 
@@ -525,7 +525,7 @@ export const isKingSafe=(obj1:any)=>{
    let wK=obj1.k2.w4;
    let bK=obj1.k1.b4;
    let grossArr=GrossValidArr(obj1);
-   console.log('grossArr',grossArr,obj1)
+   //  console.log('grossArr',grossArr,obj1)
 
    //does grssarr contains wk or bk if yes true
   let c=1;
@@ -535,7 +535,7 @@ export const isKingSafe=(obj1:any)=>{
         if(el.length>0){
             el.map((e:any)=>{
                 if(e[0]==bK[0] && e[1]==bK[1]){
-                    console.log('eee',e[0],e[1])
+                    //  console.log('eee',e[0],e[1])
                     c=2
                     return;
                 } else if(e[0]==wK[0] && e[1]==wK[1]){
@@ -571,7 +571,7 @@ export const isKingSafe=(obj1:any)=>{
 
     let arr3=grossArr[2]  //all black keys
     let arr4=grossArr[3]  //all black pawns
-    console.log('gross',grossArr,bK, obj1)
+    //  console.log('gross',grossArr,bK, obj1)
     let flag=true;
     
     if(turn==1){
@@ -627,7 +627,7 @@ export const isKingSafe=(obj1:any)=>{
          }
      })
      }
-    console.log('flag',flag)
+    //  console.log('flag',flag)
     return flag;
  }
  
@@ -649,7 +649,7 @@ export const isKingSafe=(obj1:any)=>{
              break;
          }
         }
-        console.log(key);
+        //  console.log(key);
         return key  
     }
   else{
@@ -668,7 +668,7 @@ export const isKingSafe=(obj1:any)=>{
          break;
      }
     }
-    console.log(key);
+    //  console.log(key);
     return key
   }
  }
@@ -685,7 +685,7 @@ export const isKingDead=(obj1:any,turn:Number)=>{
     let arr3=grossArr[2]
     let arr4=grossArr[3]
 let flag=1
-   // console.log('ggaa',grossArr)
+   // //  console.log('ggaa',grossArr)
     if(turn==1){
         //move all black keys while checking if king is safe from each white key 
         let c=0;
@@ -702,7 +702,7 @@ if(el.length>0){
     if(v) newObj=updateMoveObj(el[0], el[1],v, key,obj1)
         else newObj={...obj1, k1:{...obj1.k1, [key]:[el[0],el[1]]}}
  
-    console.log('ooo',newObj)
+    //  console.log('ooo',newObj)
   let ch=isKingSafe1(newObj,turn);
   
   if(ch){
@@ -724,7 +724,7 @@ if(el.length>0){
                 elem.map((el:any)=>{
 if(el.length>0){
     let v=getV(el[0],el[1],obj1,turn)
-    console.log('coo',v)
+    //  console.log('coo',v)
     let newObj;
     if(v) newObj=updateMoveObj(el[0], el[1],v, key,obj1)
         else newObj={...obj1, k1:{...obj1.k1, [key]:[el[0],el[1]]}}
@@ -753,12 +753,12 @@ if(el.length>0){
               
 if(el.length>0){
     let v=getV(el[0],el[1],obj1,turn)
-    console.log('coo',v)
+    //  console.log('coo',v)
     let newObj;
     if(v) newObj=updateMoveObj(el[0], el[1],v, key,obj1)
         else newObj={...obj1, k2:{...obj1.k2, [key]:[el[0],el[1]]}}
  
-    console.log('ooo',newObj)
+    //  console.log('ooo',newObj)
   let ch=isKingSafe1(newObj,turn);
   
   if(ch){
@@ -781,7 +781,7 @@ if(el.length>0){
                 elem.map((el:any)=>{
 if(el.length>0){
     let v=getV(el[0],el[1],obj1,turn)
-    console.log('coo',v)
+    //  console.log('coo',v)
     let newObj;
     if(v) newObj=updateMoveObj(el[0], el[1],v, key,obj1)
         else newObj={...obj1, k2:{...obj1.k2, [key]:[el[0],el[1]]}}
@@ -797,7 +797,7 @@ if(el.length>0){
             
         })
     }
-    console.log('finalflag',flag)
+    //  console.log('finalflag',flag)
     if(flag==1) return true  //i.e king is dead
     else return false;
  }
