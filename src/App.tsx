@@ -1,5 +1,4 @@
 //import { useState } from 'react'
-import { Rough } from './components/Rough'
 
 import ChessBoard from './components/ChessBoard'
 

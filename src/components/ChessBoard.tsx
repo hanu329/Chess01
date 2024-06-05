@@ -100,11 +100,10 @@ const ChessBoard = () => {
   const [item, setItem] = useState(obj); 
   const [flag, setFlag]=useState(2)
   const [validStp, setValidStp]:any = useState(null); 
-  const [vsFlag, setVsFlag]:any=useState('na')
+
   const [key, setKey] = useState("na"); 
  const [turn, setTurn] =useState(-1)     //0-white
  const [winner,setWinner]=useState('na')
- const [high, setHigh] = useState<string>('na')
  const [t0,setT0]=useState(-1)
  const [s0,setS0]=useState(-1)
  const [t1,setT1]=useState(-1)
@@ -200,21 +199,21 @@ const initTimer=()=>{
 },[item,validStp])
 
 
-const vldStpFun=(a:any,b:any,vs:any)=>{
-  console.log('vvldd',vs,a,b)
-  for(let i=0; i<8; i++){
-    for(let j=0; j<8; j++){
-      vs.map((elem:any)=>{
-        elem.map((el:any)=>{
+// const vldStpFun=(a:any,b:any,vs:any)=>{
+//   console.log('vvldd',vs,a,b)
+//   for(let i=0; i<8; i++){
+//     for(let j=0; j<8; j++){
+//       vs.map((elem:any)=>{
+//         elem.map((el:any)=>{
         
-        })
-    })
+//         })
+//     })
        
-    }
-}
+//     }
+// }
   
-}
-console.log(vsFlag)
+// }
+
 const turncheck=()=>{
   if(turn==0 && key.includes('w') || turn==1 && key.includes('b')) return true;
 
@@ -222,7 +221,7 @@ const turncheck=()=>{
 }
 
 const movebk=(a:any, b:any,c:any)=>{
-
+  console.log('c',c)
   if(turncheck()){
     let subArr:any=[a,b]
 const containsArray = validStp.some((el:any)=> {
@@ -389,11 +388,9 @@ const movebPawn=(e:any,a:any, b:any,v:any)=>{
     if(v.includes("bp")) res=blackPawnMoves(item,a,b,v);
     else res= whitePawnMoves(item,a,b,v)
       setKey(v);    
-       setValidStp((pre:any)=>{
-        return res
-       });
+       setValidStp(res);
        console.log('ress',a,b,res)
-       vldStpFun(a,b,res)
+      // vldStpFun(a,b,res)
     
        
 }
@@ -412,12 +409,10 @@ const combat=(a:any, b:any,v:any, key:any)=>{
 }
 
 
-console.log('item',item,'validStp',vsFlag)
  const renderUi=()=>{
    return <div className='contDiv'>
  {board && item && board.map((el:any)=>{
 
-let temp=0;
 
             let subArr1=[el[0],el[1]] 
   const containsArray1 = validStp && validStp.some((el:any)=> {

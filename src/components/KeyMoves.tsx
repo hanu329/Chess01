@@ -276,7 +276,7 @@ for(let i=a-1; i>=0; i--){
 }
 
 export const blackKingMoves=(obj1:any,a:any, b:any,c:any)=>{
-    //  console.log(obj1)
+     console.log(obj1)
    let validSteps=[]; 
    if(!isVacant1(a-1,b,c) && a-1>=0) validSteps.push([a-1,b])
    if(!isVacant1(a+1,b,c) && a+1<8) validSteps.push([a+1,b])
