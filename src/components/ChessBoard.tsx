@@ -221,7 +221,7 @@ const turncheck=()=>{
 }
 
 const movebk=(a:any, b:any,c:any)=>{
-  console.log('c',c)
+  console.log('c')
   if(turncheck()){
     let subArr:any=[a,b]
 const containsArray = validStp.some((el:any)=> {
@@ -503,78 +503,77 @@ const combat=(a:any, b:any,v:any, key:any)=>{
              </ToggleDiv> : <>
           {containsArray1===true?<ToggleDiv onClick={()=>movebk(el[0],el[1],'c')} key={el[0]+""+el[1]+100} id={el[0]+""+el[1]+2} bg={el[0]+el[1]} className='toggleDiv1 validSd' style={{}}>
           <div id={el[0]+""+el[1]} className='tdDiv'> 
-          <span className='point'></span>
-              {el[0]==item.k1.b1[0] && el[1]==item.k1.b1[1] &&flag==3? <div onClick={(e)=>movebk1(e,el[0],el[1],'b1')} className='chessKey'>{bk1}</div>:
+        
+              {el[0]==item.k1.b1[0] && el[1]==item.k1.b1[1] &&flag==3? <div onClick={(e)=>movebk1(e,el[0],el[1],'b1')} className='chessKey'>{bk1}<span className='point1'></span></div>:
               el[0]==item.k1.b1[0] && el[1]==item.k1.b1[1] && flag==2? <div className="chessKey"></div>:
-              el[0]==item.k1.b2[0] && el[1]==item.k1.b2[1]&& flag==3?<div onClick={(e)=>movebk2(e,el[0],el[1],'b2')} className="chessKey">{bk2}</div>:
+              el[0]==item.k1.b2[0] && el[1]==item.k1.b2[1]&& flag==3?<div onClick={(e)=>movebk2(e,el[0],el[1],'b2')} className="chessKey">{bk2}<span className='point1'></span></div>:
               el[0]==item.k1.b2[0] && el[1]==item.k1.b2[1]&& flag==2?<div className="chessKey"></div>:
-              el[0]==item.k1.b3[0] && el[1]==item.k1.b3[1]  && flag==3?<div onClick={(e)=>movebk3(e,el[0],el[1],'b3')} className="chessKey">{bk3}</div>:
+              el[0]==item.k1.b3[0] && el[1]==item.k1.b3[1]  && flag==3?<div onClick={(e)=>movebk3(e,el[0],el[1],'b3')} className="chessKey">{bk3}<span className='point1'></span></div>:
               el[0]==item.k1.b3[0] && el[1]==item.k1.b3[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k1.b4[0] && el[1]==item.k1.b4[1]  && flag==3?<div onClick={(e)=>movebKing(e,el[0],el[1],'b4')} className="chessKey">{bk4}</div>:
+              el[0]==item.k1.b4[0] && el[1]==item.k1.b4[1]  && flag==3?<div onClick={(e)=>movebKing(e,el[0],el[1],'b4')} className="chessKey">{bk4}<span className='point1'></span></div>:
               el[0]==item.k1.b4[0] && el[1]==item.k1.b4[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k1.b5[0] && el[1]==item.k1.b5[1]  && flag==3?<div onClick={(e)=>movebQueen(e,el[0],el[1],'b5')} className="chessKey">{bk5}</div>:
+              el[0]==item.k1.b5[0] && el[1]==item.k1.b5[1]  && flag==3?<div onClick={(e)=>movebQueen(e,el[0],el[1],'b5')} className="chessKey">{bk5}<span className='point1'></span></div>:
               el[0]==item.k1.b5[0] && el[1]==item.k1.b5[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k1.b6[0] && el[1]==item.k1.b6[1]  && flag==3?<div onClick={(e)=>movebk3(e,el[0],el[1],'b6')} className="chessKey">{bk6}</div>:
+              el[0]==item.k1.b6[0] && el[1]==item.k1.b6[1]  && flag==3?<div onClick={(e)=>movebk3(e,el[0],el[1],'b6')} className="chessKey">{bk6}<span className='point1'></span></div>:
               el[0]==item.k1.b6[0] && el[1]==item.k1.b6[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k1.b7[0] && el[1]==item.k1.b7[1]  && flag==3?<div onClick={(e)=>movebk2(e,el[0],el[1],'b7')} className="chessKey">{bk7}</div>:
+              el[0]==item.k1.b7[0] && el[1]==item.k1.b7[1]  && flag==3?<div onClick={(e)=>movebk2(e,el[0],el[1],'b7')} className="chessKey">{bk7}<span className='point1'></span></div>:
               el[0]==item.k1.b7[0] && el[1]==item.k1.b7[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k1.b8[0] && el[1]==item.k1.b8[1]  && flag==3?<div onClick={(e)=>movebk1(e,el[0],el[1],'b8')} className="chessKey">{bk8}</div>:
+              el[0]==item.k1.b8[0] && el[1]==item.k1.b8[1]  && flag==3?<div onClick={(e)=>movebk1(e,el[0],el[1],'b8')} className="chessKey">{bk8}<span className='point1'></span></div>:
               el[0]==item.k1.b8[0] && el[1]==item.k1.b8[1] && flag==2?<div className="chessKey"></div>:
             
-              el[0]==item.p1.bp1[0] && el[1]==item.p1.bp1[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp1')} className='chessKey'>{bp1}</div>:
+              el[0]==item.p1.bp1[0] && el[1]==item.p1.bp1[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp1')} className='chessKey'>{bp1}<span className='point1'></span></div>:
               el[0]==item.p1.bp1[0] && el[1]==item.p1.bp1[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.p1.bp2[0] && el[1]==item.p1.bp2[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp2')} className="chessKey">{bp1}</div>:
+              el[0]==item.p1.bp2[0] && el[1]==item.p1.bp2[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp2')} className="chessKey">{bp1}<span className='point1'></span></div>:
               el[0]==item.p1.bp2[0] && el[1]==item.p1.bp2[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.p1.bp3[0] && el[1]==item.p1.bp3[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp3')} className="chessKey">{bp1}</div>:
+              el[0]==item.p1.bp3[0] && el[1]==item.p1.bp3[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp3')} className="chessKey">{bp1}<span className='point1'></span></div>:
               el[0]==item.p1.bp3[0] && el[1]==item.p1.bp3[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.p1.bp4[0] && el[1]==item.p1.bp4[1] && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp4')} className="chessKey">{bp1}</div>:
+              el[0]==item.p1.bp4[0] && el[1]==item.p1.bp4[1] && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp4')} className="chessKey">{bp1}<span className='point1'></span></div>:
               el[0]==item.p1.bp4[0] && el[1]==item.p1.bp4[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.p1.bp5[0] && el[1]==item.p1.bp5[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp5')} className="chessKey">{bp1}</div>:
+              el[0]==item.p1.bp5[0] && el[1]==item.p1.bp5[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp5')} className="chessKey">{bp1}<span className='point1'></span></div>:
               el[0]==item.p1.bp5[0] && el[1]==item.p1.bp5[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.p1.bp6[0] && el[1]==item.p1.bp6[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp6')} className="chessKey">{bp1}</div>:
+              el[0]==item.p1.bp6[0] && el[1]==item.p1.bp6[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp6')} className="chessKey">{bp1}<span className='point1'></span></div>:
               el[0]==item.p1.bp6[0] && el[1]==item.p1.bp6[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.p1.bp7[0] && el[1]==item.p1.bp7[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp7')} className="chessKey">{bp1}</div>:
+              el[0]==item.p1.bp7[0] && el[1]==item.p1.bp7[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp7')} className="chessKey">{bp1}<span className='point1'></span></div>:
               el[0]==item.p1.bp7[0] && el[1]==item.p1.bp7[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.p1.bp8[0] && el[1]==item.p1.bp8[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp8')} className="chessKey">{bp1}</div>:          
+              el[0]==item.p1.bp8[0] && el[1]==item.p1.bp8[1]  && flag==3?<div onClick={(e)=>movebPawn(e,el[0],el[1],'bp8')} className="chessKey">{bp1}<span className='point1'></span></div>:          
               el[0]==item.p1.bp8[0] && el[1]==item.p1.bp8[1] && flag==2?<div className="chessKey"></div>:   
               //handle white
-             el[0]==item.p2.wp1[0] && el[1]==item.p2.wp1[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp1')} className="chessKey">{wp1}</div>:
+             el[0]==item.p2.wp1[0] && el[1]==item.p2.wp1[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp1')} className="chessKey">{wp1}<span className='point1'></span></div>:
              el[0]==item.p2.wp1[0] && el[1]==item.p2.wp1[1]&& flag==2?<div className="chessKey"></div>:
-              el[0]==item.p2.wp2[0] && el[1]==item.p2.wp2[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp2')} className="chessKey">{wp1}</div>:
+              el[0]==item.p2.wp2[0] && el[1]==item.p2.wp2[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp2')} className="chessKey">{wp1}<span className='point1'></span></div>:
               el[0]==item.p2.wp2[0] && el[1]==item.p2.wp2[1]&& flag==2?<div className="chessKey"></div>:
-              el[0]==item.p2.wp3[0] && el[1]==item.p2.wp3[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp3')} className="chessKey">{wp1}</div>:
+              el[0]==item.p2.wp3[0] && el[1]==item.p2.wp3[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp3')} className="chessKey">{wp1}<span className='point1'></span></div>:
               el[0]==item.p2.wp3[0] && el[1]==item.p2.wp3[1]&& flag==2?<div className="chessKey"></div>:
-              el[0]==item.p2.wp4[0] && el[1]==item.p2.wp4[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp4')} className="chessKey">{wp1}</div>:
+              el[0]==item.p2.wp4[0] && el[1]==item.p2.wp4[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp4')} className="chessKey">{wp1}<span className='point1'></span></div>:
               el[0]==item.p2.wp4[0] && el[1]==item.p2.wp4[1]&& flag==2?<div className="chessKey"></div>:
-              el[0]==item.p2.wp5[0] && el[1]==item.p2.wp5[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp5')} className="chessKey">{wp1}</div>:
+              el[0]==item.p2.wp5[0] && el[1]==item.p2.wp5[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp5')} className="chessKey">{wp1}<span className='point1'></span></div>:
               el[0]==item.p2.wp5[0] && el[1]==item.p2.wp5[1]&& flag==2?<div className="chessKey"></div>:
-              el[0]==item.p2.wp6[0] && el[1]==item.p2.wp6[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp6')} className="chessKey">{wp1}</div>:
+              el[0]==item.p2.wp6[0] && el[1]==item.p2.wp6[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp6')} className="chessKey">{wp1}<span className='point1'></span></div>:
               el[0]==item.p2.wp6[0] && el[1]==item.p2.wp6[1]&& flag==2?<div className="chessKey"></div>:
-              el[0]==item.p2.wp7[0] && el[1]==item.p2.wp7[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp7')} className="chessKey">{wp1}</div>:
+              el[0]==item.p2.wp7[0] && el[1]==item.p2.wp7[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp7')} className="chessKey">{wp1}<span className='point1'></span></div>:
               el[0]==item.p2.wp7[0] && el[1]==item.p2.wp7[1]&& flag==2?<div className="chessKey"></div>:
-              el[0]==item.p2.wp8[0] && el[1]==item.p2.wp8[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp8')} className="chessKey">{wp1}</div>:  
+              el[0]==item.p2.wp8[0] && el[1]==item.p2.wp8[1] && flag==3 ?<div onClick={(e)=>movebPawn(e,el[0],el[1],'wp8')} className="chessKey">{wp1}<span className='point1'></span></div>:  
               el[0]==item.p2.wp8[0] && el[1]==item.p2.wp8[1] && flag==2?<div className="chessKey"></div>:   
    
-              el[0]==item.k2.w1[0] && el[1]==item.k2.w1[1] && flag==3 ? <div onClick={(e)=>movebk1(e,el[0],el[1],'w1')} className="chessKey">{wk1}</div>:          
+              el[0]==item.k2.w1[0] && el[1]==item.k2.w1[1] && flag==3 ? <div onClick={(e)=>movebk1(e,el[0],el[1],'w1')} className="chessKey">{wk1}<span className='point1'></span></div>:          
               el[0]==item.k2.w1[0] && el[1]==item.k2.w1[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k2.w2[0] && el[1]==item.k2.w2[1] && flag==3 ?<div onClick={(e)=>movebk2(e,el[0],el[1],'w2')} className="chessKey">{wk2}</div>:
+              el[0]==item.k2.w2[0] && el[1]==item.k2.w2[1] && flag==3 ?<div onClick={(e)=>movebk2(e,el[0],el[1],'w2')} className="chessKey">{wk2}<span className='point1'></span></div>:
               el[0]==item.k2.w2[0] && el[1]==item.k2.w2[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k2.w3[0] && el[1]==item.k2.w3[1] && flag==3 ?<div onClick={(e)=>movebk3(e,el[0],el[1],'w3')} className="chessKey">{wk3}</div>:
+              el[0]==item.k2.w3[0] && el[1]==item.k2.w3[1] && flag==3 ?<div onClick={(e)=>movebk3(e,el[0],el[1],'w3')} className="chessKey">{wk3}<span className='point1'></span></div>:
               el[0]==item.k2.w3[0] && el[1]==item.k2.w3[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k2.w4[0] && el[1]==item.k2.w4[1] && flag==3 ?<div onClick={(e)=>movebKing(e,el[0],el[1],'w4')} className="chessKey">{wk4}</div>:
+              el[0]==item.k2.w4[0] && el[1]==item.k2.w4[1] && flag==3 ?<div onClick={(e)=>movebKing(e,el[0],el[1],'w4')} className="chessKey">{wk4}<span className='point1'></span></div>:
               el[0]==item.k2.w4[0] && el[1]==item.k2.w4[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k2.w5[0] && el[1]==item.k2.w5[1] && flag==3 ?<div onClick={(e)=>movebQueen(e,el[0],el[1],'w5')} className="chessKey">{wk5}</div>:
+              el[0]==item.k2.w5[0] && el[1]==item.k2.w5[1] && flag==3 ?<div onClick={(e)=>movebQueen(e,el[0],el[1],'w5')} className="chessKey">{wk5}<span className='point1'></span></div>:
               el[0]==item.k2.w5[0] && el[1]==item.k2.w5[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k2.w6[0] && el[1]==item.k2.w6[1] && flag==3 ?<div onClick={(e)=>movebk3(e,el[0],el[1],'w6')} className="chessKey">{wk6}</div>:
+              el[0]==item.k2.w6[0] && el[1]==item.k2.w6[1] && flag==3 ?<div onClick={(e)=>movebk3(e,el[0],el[1],'w6')} className="chessKey">{wk6}<span className='point1'></span></div>:
               el[0]==item.k2.w6[0] && el[1]==item.k2.w6[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k2.w7[0] && el[1]==item.k2.w7[1] && flag==3 ?<div onClick={(e)=>movebk2(e,el[0],el[1],'w7')} className="chessKey">{wk7}</div>:
+              el[0]==item.k2.w7[0] && el[1]==item.k2.w7[1] && flag==3 ?<div onClick={(e)=>movebk2(e,el[0],el[1],'w7')} className="chessKey">{wk7}<span className='point1'></span></div>:
               el[0]==item.k2.w7[0] && el[1]==item.k2.w7[1] && flag==2?<div className="chessKey"></div>:
-              el[0]==item.k2.w8[0] && el[1]==item.k2.w8[1] && flag==3 ?<div onClick={(e)=>movebk1(e,el[0],el[1],'w8')} className="chessKey">{wk8}</div>:
-              el[0]==item.k2.w8[0] && el[1]==item.k2.w8[1] && flag==2?<div className="chessKey"></div>:
-              
-             ""}   
+              el[0]==item.k2.w8[0] && el[1]==item.k2.w8[1] && flag==3 ?<div onClick={(e)=>movebk1(e,el[0],el[1],'w8')} className="chessKey">{wk8}<span className='point1'></span></div>:
+              el[0]==item.k2.w8[0] && el[1]==item.k2.w8[1] && flag==2?<div className="chessKey"></div>:<span className='point2'></span>           
+             }   
            
-                 
+           
                  </div> 
                 </ToggleDiv> :<ToggleDiv onClick={()=>movebk(el[0],el[1],'c')} key={el[0]+""+el[1]+100} id={el[0]+""+el[1]+2} bg={el[0]+el[1]} className='toggleDiv1' style={{}}>
       <div id={el[0]+""+el[1]} className='tdDiv'> 
@@ -644,9 +643,9 @@ const combat=(a:any, b:any,v:any, key:any)=>{
           el[0]==item.k2.w7[0] && el[1]==item.k2.w7[1] && flag==3 ?<div onClick={(e)=>movebk2(e,el[0],el[1],'w7')} className="chessKey">{wk7}</div>:
           el[0]==item.k2.w7[0] && el[1]==item.k2.w7[1] && flag==2?<div className="chessKey"></div>:
           el[0]==item.k2.w8[0] && el[1]==item.k2.w8[1] && flag==3 ?<div onClick={(e)=>movebk1(e,el[0],el[1],'w8')} className="chessKey">{wk8}</div>:
-          el[0]==item.k2.w8[0] && el[1]==item.k2.w8[1] && flag==2?<div className="chessKey"></div>:
+          el[0]==item.k2.w8[0] && el[1]==item.k2.w8[1] && flag==2?<div className="chessKey"></div>:<span className='point3'></span>
           
-         ""}   
+         }   
        
              
              </div> 

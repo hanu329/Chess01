@@ -7,6 +7,9 @@ function App() {
 
   return (
     <> <ChessBoard />
+    {/* <hr />
+    <span>jhfsd </span>
+    <div>sfdfj</div> */}
     </>
      
   )
