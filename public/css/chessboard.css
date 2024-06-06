@@ -124,7 +124,7 @@ button:active{
 .point1{
  display: inline-block;
   border-radius: 50%;
-  background-color: grey;
+  background-color: red;
   position: relative;
   bottom:10vh; 
   left:.5vw;
