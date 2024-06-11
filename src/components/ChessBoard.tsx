@@ -102,7 +102,7 @@ const ChessBoard = () => {
   const [validStp, setValidStp]:any = useState(null); 
 
   const [key, setKey] = useState("na"); 
- const [turn, setTurn] =useState(-1)     //0-white
+ const [turn, setTurn] =useState(-1)     
  const [winner,setWinner]=useState('na')
  const [t0,setT0]=useState(-1)
  const [s0,setS0]=useState(-1)
@@ -221,7 +221,7 @@ const turncheck=()=>{
 }
 
 const movebk=(a:any, b:any,c:any)=>{
-  console.log('c')
+  console.log('c',c)
   if(turncheck()){
     let subArr:any=[a,b]
 const containsArray = validStp.some((el:any)=> {
