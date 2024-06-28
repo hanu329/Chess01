@@ -116,21 +116,22 @@ button:active{
   box-sizing: border-box;
 }
 
-.validSd{
+/* .validSd{
    border:2px solid white; 
-  }
+   border-collapse:collapse;
+  } */
 
-/* 
+
 .point1{
  display: inline-block;
   border-radius: 50%;
   background-color: red;
   position: relative;
-  bottom:10vh; 
-  left:.5vw;
-  width:10px;
-  height:10px;
-
+  bottom:8vh; 
+  
+  width:12px;
+  height:12px;
+  opacity: .8;
 }
 
 .point2{
@@ -140,10 +141,10 @@ button:active{
   position: relative;
   top:2.5vh;
   left:2vw;
-  width:10px;
-  height:10px;
-
-} */
+  width:12px;
+  height:12px;
+opacity: .5;
+}
 @media screen and (max-width:30rem) {
  
   .container{
@@ -200,6 +201,32 @@ button:active{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     transition: 2s;
   }
+
+  .point1{
+    display: inline-block;
+     border-radius: 50%;
+     background-color: red;
+     position: relative;
+    
+     left:.5vw;
+     bottom:3vh;
+     width:10px;
+     height:10px;
+     opacity:.8
+   }
+
+   .point2{
+    display: inline-block;
+     border-radius: 50%;
+     background-color: grey;
+     position: relative;
+     top:2.5vh;
+     left:4vw;
+     width:10px;
+     height:10px;
+     opacity: .5;
+   
+   }
 }
 
 
