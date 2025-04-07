@@ -249,7 +249,7 @@ opacity: .5;
   }
   .initImg{
     animation:spy 1s linear infinite;
-     /* border:3px solid red; */
+     border:3px solid red;
      margin:30% 40%;
      border-radius: 50%;
 
