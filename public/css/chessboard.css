@@ -145,13 +145,126 @@ button:active{
   height:12px;
 opacity: .5;
 }
+
+.spn{
+  
+ position: relative;
+ left:7rem;
+ bottom: 7rem;
+ /* border: 2px solid red; */
+  color: white;
+  font-size: 20px;
+
+}
+.initImg{
+  animation:spy 1s linear infinite;
+   /* border:3px solid red; */
+   margin:60% 90%;
+   border-radius: 50%;
+}
+@keyframes spy{
+   0%{
+    transform: rotate(0deg);
+   }
+   60%{
+    transform: rotate(360deg)
+   }
+   100%{
+    transform: rotate(360deg)
+   }
+}
+
+@media screen and (min-width:30rem) and (max-width:40rem){
+
+  .initImg{
+    animation:spy 1s linear infinite;
+     /* border:3px solid red; */
+     margin:60% 90%;
+     border-radius: 50%;
+  }
+  @keyframes spy{
+     0%{
+      transform: rotate(0deg);
+     }
+     60%{
+      transform: rotate(360deg)
+     }
+     100%{
+      transform: rotate(360deg)
+     }
+  }
+  .span{
+    color:white;
+    font-size:10px;
+    margin-left:0rem;
+    margin-bottom:5vw;
+  }
+  .toggleDiv1{
+    width:12.5%;
+    height:8vh;
+  }
+  .mainDiv{
+    margin-top:5vw;
+    display:block;
+   height:70vh;
+  }
+  .contDiv{
+    margin-top:3vw;
+    width:100%;
+    margin-left: 0px;
+  }
+  .chessKey{
+      padding-left:4vw;
+      font-size: 6vw;
+      height:4vh;
+  }
+  button{
+    margin:2vh 2vw;
+  }
+  button:active{
+    margin:2vw;
+    background-color: grey;
+  }
+  .winner{
+    /* border:2px solid grey; */
+    border-radius: 3vw;
+    width:24vw;
+    height: 8vh;
+    background-color: purple;
+    color:white;
+    padding-top:3vh;
+    font-size:1.7vw;
+    position: relative;
+    left:60%;
+    bottom:70vh;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  }
+}
+
 @media screen and (max-width:30rem) {
  
   .container{
 
     margin-left:2vw;
   }
- 
+  .initImg{
+    animation:spy 1s linear infinite;
+     /* border:3px solid red; */
+     margin:30% 40%;
+     border-radius: 50%;
+
+  }
+  @keyframes spy{
+     0%{
+      transform: rotate(0deg);
+     }
+     60%{
+      transform: rotate(360deg)
+     }
+     100%{
+      transform: rotate(360deg)
+     }
+  }
   .span{
     color:white;
     font-size:10px;
@@ -227,83 +340,4 @@ opacity: .5;
      opacity: .5;
    
    }
-}
-.spn{
-  
- position: relative;
- left:7rem;
- bottom: 7rem;
- /* border: 2px solid red; */
-  color: white;
-  font-size: 20px;
-
-}
-.initImg{
-  animation:spy 1s linear infinite;
-   /* border:3px solid red; */
-   margin:60% 90%;
-   border-radius: 50%;
-}
-@keyframes spy{
-   0%{
-    transform: rotate(0deg);
-   }
-   60%{
-    transform: rotate(360deg)
-   }
-   100%{
-    transform: rotate(360deg)
-   }
-}
-
-@media screen and (min-width:30rem) and (max-width:40rem){
-
-
-  .span{
-    color:white;
-    font-size:10px;
-    margin-left:0rem;
-    margin-bottom:5vw;
   }
-  .toggleDiv1{
-    width:12.5%;
-    height:8vh;
-  }
-  .mainDiv{
-    margin-top:5vw;
-    display:block;
-   height:70vh;
-  }
-  .contDiv{
-    margin-top:3vw;
-    width:100%;
-    margin-left: 0px;
-  }
-  .chessKey{
-      padding-left:4vw;
-      font-size: 6vw;
-      height:4vh;
-  }
-  button{
-    margin:2vh 2vw;
-  }
-  button:active{
-    margin:2vw;
-    background-color: grey;
-  }
-  .winner{
-    /* border:2px solid grey; */
-    border-radius: 3vw;
-    width:24vw;
-    height: 8vh;
-    background-color: purple;
-    color:white;
-    padding-top:3vh;
-    font-size:1.7vw;
-    position: relative;
-    left:60%;
-    bottom:70vh;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  }
-}
-

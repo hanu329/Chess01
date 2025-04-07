@@ -789,7 +789,7 @@ else if(v=='20'){
           <img src="chess1.png" alt="img here" width='50px' height='50px' className='initImg'/> <span className='spn'>welcome to chess...</span>
          </div>:renderUi()}
          {t0>=0? <span className='s2' style={{position:'relative',bottom:'20%', left:'47%'}}>
-        {t0<10?'0'+t0:t0}:{s0<10?'0'+s0:s0}f1
+        {t0<10?'0'+t0:t0}:{s0<10?'0'+s0:s0}
       </span>:''}
         
          </div>
