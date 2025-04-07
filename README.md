@@ -28,3 +28,17 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+
+<!-- MANUAL STUFFFFFFs:--
+  22 NOV 2024
+fun movebk refer to parent div of all the keys,pawn
+movebpawn is for all white black pawn
+movebk1 is for black hathi also for white hathi
+updateMoveObj fun is like combat for cross keys exluding pawns
+
+ -->
+
+
+

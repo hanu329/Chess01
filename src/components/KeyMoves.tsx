@@ -314,6 +314,9 @@ export const whitePawnMoves=(obj1:any,a:any, b:any,c:any)=>{
 
 export const updateMoveObj=(a:any, b:any,v:any, key:any,  boardObj:any)=>{
 //v should be romoved and key should be modified
+
+//key
+console.log('nnn',key,v)
     if(key.includes('bp')){
         let newobj:any=[]
         if(v.includes('wp')){
@@ -327,7 +330,22 @@ export const updateMoveObj=(a:any, b:any,v:any, key:any,  boardObj:any)=>{
           }
         }
         else if(v.includes('w') && !v.includes('wp')){
-      
+         //if coord(key)-[a,b]=`1 only  v==w3, key=bp1
+         // 4 6, 3 5,3 7
+        //  for(let i in obj){
+        //     console.log(i,obj[i])
+        //  }
+          let  validkey:boolean=false;
+         for(let i in boardObj.p1){
+                 if(i.includes(key)){
+                    console.log('trrr',i,boardObj.p1[i],a,b)
+                    let x=boardObj.p1[i];
+                    if((a==x[0]+1 && b==x[1]+1) || (a==x[0]+1 && b==x[1]-1)){
+                        validkey=true;
+                    }
+                 }
+         }
+          if(!validkey) return;
              newobj={...boardObj,
                 p1:{...boardObj.p1,
                [key]:[a,b],
@@ -337,7 +355,7 @@ export const updateMoveObj=(a:any, b:any,v:any, key:any,  boardObj:any)=>{
                 [v]:[-1,-1]
             }
            }   
-           //  console.log(newobj)    
+           //console.log(newobj)    
           }
        //   delete newobj['k2'][v]
          //  console.log('updaatemove',newobj)
@@ -384,7 +402,21 @@ export const updateMoveObj=(a:any, b:any,v:any, key:any,  boardObj:any)=>{
             }               
           }
         }
-        else if(v.includes('b') && !v.includes('bp')){     
+        else if(v.includes('b') && !v.includes('bp')){   
+            
+            ///
+            let  validkey:boolean=false;
+         for(let i in boardObj.p2){
+                 if(i.includes(key)){
+                    console.log('prrr',i,boardObj.p2[i],a,b)
+                    let x=boardObj.p2[i];
+                    if((a==x[0]+1 && b==x[1]+1) || (a==x[0]+1 && b==x[1]-1)){
+                        validkey=true;
+                    }
+                 }
+         }
+          if(!validkey) return;
+            
              newobj={...boardObj,
                 p2:{...boardObj.p2,
                [key]:[a,b],

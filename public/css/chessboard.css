@@ -212,7 +212,7 @@ opacity: .5;
      bottom:3vh;
      width:10px;
      height:10px;
-     opacity:.8
+     opacity:.7
    }
 
    .point2{
@@ -228,7 +228,33 @@ opacity: .5;
    
    }
 }
+.spn{
+  
+ position: relative;
+ left:7rem;
+ bottom: 7rem;
+ /* border: 2px solid red; */
+  color: white;
+  font-size: 20px;
 
+}
+.initImg{
+  animation:spy 1s linear infinite;
+   /* border:3px solid red; */
+   margin:60% 90%;
+   border-radius: 50%;
+}
+@keyframes spy{
+   0%{
+    transform: rotate(0deg);
+   }
+   60%{
+    transform: rotate(360deg)
+   }
+   100%{
+    transform: rotate(360deg)
+   }
+}
 
 @media screen and (min-width:30rem) and (max-width:40rem){
 

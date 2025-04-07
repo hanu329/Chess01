@@ -95,7 +95,7 @@ const obj={
   k2:whiteKey,
   p2:whitePawn
 }
-
+//obj.k1.b1, opj.p1.bp1,obj.k2.w1,obj.p2.wp1
 const ChessBoard = () => {
   const [item, setItem] = useState(obj); 
   const [flag, setFlag]=useState(2)
@@ -108,8 +108,9 @@ const ChessBoard = () => {
  const [s0,setS0]=useState(-1)
  const [t1,setT1]=useState(-1)
  const [s1,setS1]=useState(-1)
+ const [load, setLoad]=useState('')
 
-
+const [turnText, setTurnText]=useState('na');
 let tRef1:any=useRef(0)
 let tRef2:any=useRef(0)
 
@@ -119,6 +120,14 @@ const initTimer=()=>{
   setS0(-1)
   setS1(-1)
 }
+console.log('turnnn',turnText)
+const addTurn=()=>{
+  console.log(12345)
+  if(turn==0) setTurnText('white')
+    else if(turn==1) setTurnText('black')
+  console.log('turn',turn)
+}
+console.log('turnnn2',turnText)
 
  const showTimer=(t:number)=>{
  
@@ -179,6 +188,7 @@ const initTimer=()=>{
  }
 
  useEffect(()=>{
+  addTurn()
   localStorage.setItem("chessObj", JSON.stringify(item)); 
  
   let ch=isKingSafe(item)
@@ -195,10 +205,10 @@ const initTimer=()=>{
 }
     }
   }
- 
-},[item,validStp])
+ console.log('key',key,'validstp',validStp)
+},[item,validStp,turn])
 
-
+console.log('vvv',validStp)
 // const vldStpFun=(a:any,b:any,vs:any)=>{
 //   console.log('vvldd',vs,a,b)
 //   for(let i=0; i<8; i++){
@@ -222,6 +232,7 @@ const turncheck=()=>{
 
 const movebk=(a:any, b:any,c:any)=>{
   console.log('c',c)
+ if(!turncheck()) return;
   if(turncheck()){
     let subArr:any=[a,b]
 const containsArray = validStp.some((el:any)=> {
@@ -249,8 +260,23 @@ const containsArray = validStp.some((el:any)=> {
   }
 
 }
+const validCrosskey=(a:any, b:any)=>{
+  
+  let  validkey:boolean=false;
+  for(let i=0; i<validStp.length; i++){
+    if(validStp[i][0]==a && validStp[i][1]==b){
+      validkey=true;
+      break;
+    }
+  }
+     console.log('jjjrr',a,b,validStp)
+    // if(!validkey) return;
+    return validkey;
+}
+
 const movebk1=(e:any,a:any, b:any,v:any)=>{
   e.stopPropagation();
+  //if 
   if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
     let res=RookMoves1(item,a,b,v);
       if(res.length>0){
@@ -260,20 +286,26 @@ const movebk1=(e:any,a:any, b:any,v:any)=>{
   } 
   else{  
     let newObj= JSON.parse(JSON.stringify(item));
+    let tt=validCrosskey(a,b)
+    if(!tt) return;
     let res=updateMoveObj(a, b,v, key,newObj)
+   
+
     setValidStp(null)
     let ch=isKingSafe(res)
-      // console.log('chhhs',ch,key,turn)
+       console.log('chhhs',ch,key,'turnnnn',turn)
       if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
         setItem(res)
-        {turn==0?<>{setTurn(1)}{showTimer(1)}</>:<>{setTurn(0)}{showTimer(0)}</>}
+        {turn==0?<>{setTurn(1)}{showTimer(1)}</>:<>{setTurn(0)}{showTimer(0)}</>} 
       } 
     setKey('na')
   }
 }
 
 
+
 const movebk2=(e:any, a:any, b:any,v:any)=>{
+  console.log('2222',key,v) 
   e.stopPropagation();
   if((key.includes('b') && v.includes('b')) ||(key.includes('w') && v.includes('w')) || key=='na'){  
     let res=KnightMoves1(item,a,b,v);
@@ -284,6 +316,8 @@ const movebk2=(e:any, a:any, b:any,v:any)=>{
   } 
   else{  
     let newObj= JSON.parse(JSON.stringify(item));
+  let tt=validCrosskey(a,b)
+if(!tt) return;
     let res=updateMoveObj(a, b,v, key,newObj)
     setValidStp(null)
     let ch=isKingSafe(res)
@@ -307,6 +341,8 @@ const movebk3=(e:any, a:any, b:any,v:any)=>{
   } 
   else{  
     let newObj= JSON.parse(JSON.stringify(item));
+    let tt=validCrosskey(a,b)
+    if(!tt) return;
     let res=updateMoveObj(a, b,v, key,newObj)
     setValidStp(null)
     let ch=isKingSafe(res)
@@ -332,6 +368,8 @@ const movebQueen=(e:any, a:any, b:any,v:any)=>{
   } 
   else{  
     let newObj= JSON.parse(JSON.stringify(item));
+    let tt=validCrosskey(a,b)
+    if(!tt) return;
     let res=updateMoveObj(a, b,v, key,newObj)
    
     setValidStp(null)
@@ -355,6 +393,8 @@ const movebKing=(e:any, a:any, b:any,v:any)=>{
   } 
   else{  
     let newObj= JSON.parse(JSON.stringify(item));
+    let tt=validCrosskey(a,b)
+    if(!tt) return;
     let res=updateMoveObj(a, b,v, key,newObj)
     setValidStp(null)
     let ch=isKingSafe(res)
@@ -368,6 +408,8 @@ const movebKing=(e:any, a:any, b:any,v:any)=>{
 }
 
 const movebPawn=(e:any,a:any, b:any,v:any)=>{
+
+  console.log('nntr',turn,v,key,a,b)
   //
   e.stopPropagation();
  
@@ -376,6 +418,7 @@ const movebPawn=(e:any,a:any, b:any,v:any)=>{
     validStp.map((el:any)=>{
       if(el[0]==a && el[1]==b){
         f=2
+        //if turn is valid then combat
        combat(a,b,v,key)
        return;
       }
@@ -397,6 +440,8 @@ const movebPawn=(e:any,a:any, b:any,v:any)=>{
 const combat=(a:any, b:any,v:any, key:any)=>{
   
   let newObj= JSON.parse(JSON.stringify(item)); 
+  let tt=validCrosskey(a,b)
+  if(!tt) return;
   var res=updateMoveObj(a, b,v, key,newObj)
   let ch=isKingSafe(res)
      if(!ch[0] && ch[1]==2 && key.includes('w') || !ch[0] && ch[1]==3 && key.includes('b') || ch[0]){
@@ -410,7 +455,8 @@ const combat=(a:any, b:any,v:any, key:any)=>{
 
 
  const renderUi=()=>{
-   return <div className='contDiv'>
+   return <div className='contDiv'> 
+  
  {board && item && board.map((el:any)=>{
 
 
@@ -425,6 +471,7 @@ const combat=(a:any, b:any,v:any, key:any)=>{
 
      
              return <>
+
 
              {validStp==null? <ToggleDiv onClick={()=>movebk(el[0],el[1],'c')} key={el[0]+""+el[1]+1} id={el[0]+""+el[1]+2} bg={el[0]+el[1]} className='toggleDiv1' style={{}}>
        <div id={el[0]+""+el[1]} className='tdDiv'> 
@@ -664,17 +711,27 @@ const combat=(a:any, b:any,v:any, key:any)=>{
 
 const startblack=()=>{
    setTurn(1)
-  {t1>0?showTimer(1):''}
-   setFlag(3)
-   setItem(obj)
-   setWinner('na')
+   setTimeout(()=>{
+    setLoad('')
+    {t1>0?showTimer(1):''}
+    setFlag(3)
+    setItem(obj)
+    setWinner('na')
+   },3000)
+   setLoad('something')
 }
 const startWhite=()=>{
+  setTimeout(()=>{
+    setLoad('')
+  
+    {t1>0?showTimer(0):''}
+    setFlag(3)
+    setItem(obj)
+    setWinner('na')
+  
+  },3000)
   setTurn(0)
-  {t1>0?showTimer(0):''}
-  setFlag(3)
-  setItem(obj)
-  setWinner('na')
+  setLoad('something')
 }
 // console.log('tt111',t1)
 const timerFun=(e:any)=>{
@@ -696,6 +753,9 @@ else if(v=='20'){
     setS0(0); setS1(0);
   } 
 }
+{
+  console.log('tt',turnText)
+}
     return <div>
      <div className='container'>
      <FontAwesomeIcon icon={regularChessKing} className='k1'  />
@@ -710,16 +770,26 @@ else if(v=='20'){
         
      </select>
      
+     <span>
+   
+   <button onClick={startWhite} className='restartBtn'>start with white</button>
+   <span style={{color: turn==0?'white':'black'}}>{turnText=='na'?'no trun':turnText+"'s turn"}</span>
+   <button onClick={startblack} className='restartBtn'>start with black</button>
+   </span>
+    
       <div className='mainDiv' >
+        
       <div>
-        {t1>=0?<span className='s1' style={{}}> 
+        {t1>=0?<span className='s1' style={{position:'relative',top:'20%',left:'47%'}}> 
         {t1<10?'0'+t1:t1}:{s1<10?'0'+s1:s1}
       </span>:''}
       
-      
-         {renderUi()}
-         {t0>=0? <span className='s2' style={{}}>
-        {t0<10?'0'+t0:t0}:{s0<10?'0'+s0:s0}
+   
+         {load!=''?<div>
+          <img src="chess1.png" alt="img here" width='50px' height='50px' className='initImg'/> <span className='spn'>welcome to chess...</span>
+         </div>:renderUi()}
+         {t0>=0? <span className='s2' style={{position:'relative',bottom:'20%', left:'47%'}}>
+        {t0<10?'0'+t0:t0}:{s0<10?'0'+s0:s0}f1
       </span>:''}
         
          </div>
@@ -728,10 +798,7 @@ else if(v=='20'){
         </div>
         
       </div>
-   <div>
-   <button onClick={startWhite} className='restartBtn'>start with white</button>
-   <button onClick={startblack} className='restartBtn'>start with black</button>
-   </div>
+ 
    <div>
       {winner=='white'?<div className='winner'>white is winner</div>:winner=='black'?<div className='winner'>black is winner</div>:""}
      </div>
