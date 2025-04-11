@@ -248,8 +248,8 @@ opacity: .5;
     margin-left:2vw;
   }
   .initImg{
-  width:100px;
-  height:100px;
+  width:60px;
+  height:60px;
     animation:spy 1s linear infinite;
      margin:30% 40%;
      border-radius: 50%;
