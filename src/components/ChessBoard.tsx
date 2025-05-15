@@ -109,6 +109,7 @@ const ChessBoard = () => {
  const [t1,setT1]=useState(-1)
  const [s1,setS1]=useState(-1)
  const [load, setLoad]=useState('')
+ const [pawnFist, setpawnFirst]=useState('')
 
 const [turnText, setTurnText]=useState('na');
 let tRef1:any=useRef(0)
@@ -433,7 +434,7 @@ const movebPawn=(e:any,a:any, b:any,v:any)=>{
       setKey(v);    
        setValidStp(res);
        console.log('ress',a,b,res)
-      // vldStpFun(a,b,res)
+   
     
        
 }
@@ -757,25 +758,29 @@ else if(v=='20'){
   console.log('tt',turnText)
 }
     return <div>
-     <div className='container'>
+     <div className='container' >
      <FontAwesomeIcon icon={regularChessKing} className='k1'  />
      <h1 className="head"> Chess</h1>
      <FontAwesomeIcon icon={solidChessKing} className='k2' />
      </div>
-     <select style={{borderRadius:'2vw',outline:'none'}} onChange={(e)=>timerFun(e)}>
-     <option value='wt'>no Timer</option>
-        <option value='10'>10 min</option>
-       <option value='20'> 20 min</option>
-       <option value='30'> 30 min</option>
-        
-     </select>
+     <div style={{paddingTop:"0px", marginLeft:"4rem",height:"6rem"}}>
+     <select style={{borderRadius:'2vw',outline:'none', margin:"0px", padding:"0px"}} onChange={(e)=>timerFun(e)}>
+      
+      <option value='wt'>no Timer</option>
+         <option value='10'>10 min</option>
+        <option value='20'> 20 min</option>
+        <option value='30'> 30 min</option>
+         
+      </select>
+      
+      <span>
+    
+    <button onClick={startWhite} className='restartBtn'>start with white</button>
+    <span style={{color: turn==0?'white':'black'}}>{turnText=='na'?'no trun':turnText+"'s turn"}</span>
+    <button onClick={startblack} className='restartBtn'>start with black</button>
+    </span>
+     </div>
      
-     <span>
-   
-   <button onClick={startWhite} className='restartBtn'>start with white</button>
-   <span style={{color: turn==0?'white':'black'}}>{turnText=='na'?'no trun':turnText+"'s turn"}</span>
-   <button onClick={startblack} className='restartBtn'>start with black</button>
-   </span>
     
       <div className='mainDiv' >
         
@@ -786,6 +791,9 @@ else if(v=='20'){
       
    
          {load!=''?<div>
+          <audio>
+            <source src="" type='audio/mpeg' />
+          </audio>
           <img src="chess1.png" alt="img here" width='50px' height='50px' className='initImg'/> <span className='spn'>welcome to chess...</span>
          </div>:renderUi()}
          {t0>=0? <span className='s2' style={{position:'relative',bottom:'20%', left:'47%'}}>
