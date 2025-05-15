@@ -178,7 +178,7 @@ opacity: .5;
 
   .initImg{
     animation:spy 1s linear infinite;
-     /* border:3px solid red; */
+      border:3px solid red; 
      margin:60% 90%;
      border-radius: 50%;
   }
@@ -248,8 +248,9 @@ opacity: .5;
     margin-left:2vw;
   }
   .initImg{
+  width:60px;
+  height:60px;
     animation:spy 1s linear infinite;
-     /* border:3px solid red; */
      margin:30% 40%;
      border-radius: 50%;
 
